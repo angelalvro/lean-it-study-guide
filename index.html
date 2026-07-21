@@ -1,0 +1,1073 @@
+<title>Lean IT Foundation — Guía de estudio</title>
+<style>
+  :root{
+    --bg:#EDEFEA; --surface:#FFFFFF; --surface-2:#E3E6DE; --surface-3:#D9DCD2;
+    --ink:#1A2420; --ink-soft:#4B564F; --ink-faint:#7D897F; --rule:#CBD0C6;
+    --accent:#D97B29; --accent-ink:#7A3E10; --accent-soft:#F3DFC4;
+    --good:#2F7A4D; --good-soft:#DCEEE1; --bad:#C0392B; --bad-soft:#F6DEDA;
+    --shadow: 0 1px 2px rgba(20,24,20,.06), 0 6px 20px rgba(20,24,20,.06);
+    --radius: 10px;
+    --font-display:'Bahnschrift','Segoe UI Semibold','Roboto Condensed','Arial Narrow',sans-serif;
+    --font-body:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+    --font-mono:'Consolas','Cascadia Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#14181A; --surface:#1D2321; --surface-2:#242B27; --surface-3:#2C3430;
+      --ink:#E9ECE6; --ink-soft:#A8B2A9; --ink-faint:#78837B; --rule:#333B34;
+      --accent:#F0A050; --accent-ink:#FFE1BB; --accent-soft:#3A2B18;
+      --good:#4FAE74; --good-soft:#1C3327; --bad:#E06455; --bad-soft:#3A2220;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14181A; --surface:#1D2321; --surface-2:#242B27; --surface-3:#2C3430;
+    --ink:#E9ECE6; --ink-soft:#A8B2A9; --ink-faint:#78837B; --rule:#333B34;
+    --accent:#F0A050; --accent-ink:#FFE1BB; --accent-soft:#3A2B18;
+    --good:#4FAE74; --good-soft:#1C3327; --bad:#E06455; --bad-soft:#3A2220;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#EDEFEA; --surface:#FFFFFF; --surface-2:#E3E6DE; --surface-3:#D9DCD2;
+    --ink:#1A2420; --ink-soft:#4B564F; --ink-faint:#7D897F; --rule:#CBD0C6;
+    --accent:#D97B29; --accent-ink:#7A3E10; --accent-soft:#F3DFC4;
+    --good:#2F7A4D; --good-soft:#DCEEE1; --bad:#C0392B; --bad-soft:#F6DEDA;
+    --shadow: 0 1px 2px rgba(20,24,20,.06), 0 6px 20px rgba(20,24,20,.06);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--font-body); font-size:16.5px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); }
+
+  .app{ max-width:1280px; margin:0 auto; padding:22px 20px 64px; }
+
+  /* ---------- Header ---------- */
+  .masthead{
+    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+    padding:6px 4px 18px; border-bottom:2px solid var(--ink);
+    flex-wrap:wrap;
+  }
+  .masthead .brand{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-ink); background:var(--accent-soft); padding:3px 8px; border-radius:4px;
+  }
+  h1.title{
+    font-family:var(--font-display); font-weight:700; font-size:clamp(22px,3vw,30px);
+    margin:0; letter-spacing:.01em; text-wrap:balance;
+  }
+  .masthead .meta{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint); text-align:right;
+  }
+
+  /* ---------- Layout: rail + content ---------- */
+  .layout{ display:grid; grid-template-columns: 250px 1fr; gap:22px; margin-top:22px; align-items:start; }
+  @media (max-width: 860px){ .layout{ grid-template-columns:1fr; } }
+
+  .rail{
+    display:flex; flex-direction:column; gap:6px; position:sticky; top:16px;
+    background:var(--surface-2); border:1px solid var(--rule); border-radius:var(--radius);
+    padding:10px;
+  }
+  .rail-heading{
+    font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); padding:6px 8px 2px;
+  }
+  .rail-item{
+    display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+    background:transparent; border:1px solid transparent; border-radius:8px;
+    padding:9px 10px; cursor:pointer; color:var(--ink); font:inherit; font-size:14.5px;
+  }
+  .rail-item:hover{ background:var(--surface); }
+  .rail-item.active{ background:var(--surface); border-color:var(--rule); box-shadow:var(--shadow); }
+  .rail-item .code{
+    font-family:var(--font-mono); font-weight:700; font-size:11.5px; letter-spacing:.04em;
+    width:30px; flex:none; color:var(--ink-faint);
+  }
+  .rail-item.active .code{ color:var(--accent-ink); }
+  .rail-item .label{ flex:1; line-height:1.25; }
+  .rail-item .dot{
+    flex:none; width:9px; height:9px; border-radius:50%; background:var(--rule);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);
+  }
+  .rail-item .dot.some{ background:var(--accent); }
+  .rail-item .dot.done{ background:var(--good); }
+  .rail-item .dot.done.wrong{ background:var(--bad); }
+  .rail-divider{ height:1px; background:var(--rule); margin:8px 4px; }
+  .rail-exam{ border-top:1px dashed var(--rule); margin-top:4px; padding-top:8px; }
+
+  /* ---------- Content panel ---------- */
+  .panel{
+    background:var(--surface); border:1px solid var(--rule); border-radius:var(--radius);
+    box-shadow:var(--shadow); min-height:420px;
+  }
+  .panel-head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    padding:18px 22px; border-bottom:1px solid var(--rule);
+  }
+  .panel-head h2{
+    font-family:var(--font-display); font-size:22px; margin:0; text-wrap:balance;
+  }
+  .panel-head .sub{ font-size:13.5px; color:var(--ink-soft); font-family:var(--font-mono); }
+
+  .subtabs{ display:flex; gap:4px; padding:0 22px; border-bottom:1px solid var(--rule); flex-wrap:wrap; }
+  .subtab{
+    font:inherit; font-family:var(--font-display); font-size:14px; letter-spacing:.02em;
+    background:none; border:none; border-bottom:3px solid transparent; color:var(--ink-soft);
+    padding:11px 6px; margin-right:16px; cursor:pointer;
+  }
+  .subtab:hover{ color:var(--ink); }
+  .subtab.active{ color:var(--ink); border-bottom-color:var(--accent); font-weight:700; }
+
+  .panel-body{ padding:22px; }
+  @media (max-width:560px){ .panel-body{ padding:16px; } .panel-head{padding:14px 16px;} .subtabs{padding:0 16px;} }
+
+  /* ---------- Theory typography ---------- */
+  .theory h3{
+    font-family:var(--font-display); font-size:17px; margin:26px 0 8px; letter-spacing:.01em;
+    color:var(--ink);
+  }
+  .theory h3:first-child{ margin-top:0; }
+  .theory h4{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--accent-ink); margin:18px 0 6px;
+  }
+  .theory p{ margin:0 0 10px; max-width:66ch; }
+  .theory ul{ margin:0 0 12px; padding-left:1.2em; max-width:66ch; }
+  .theory li{ margin:0 0 5px; }
+  .theory strong{ color:var(--ink); }
+  .theory .term{
+    font-family:var(--font-mono); font-weight:700; background:var(--surface-2);
+    padding:0 4px; border-radius:3px; font-size:.92em;
+  }
+  .quote{
+    border-left:3px solid var(--accent); background:var(--surface-2); border-radius:0 8px 8px 0;
+    padding:10px 14px; margin:14px 0; font-style:italic; color:var(--ink-soft); max-width:60ch;
+  }
+  .quote cite{ display:block; font-style:normal; font-family:var(--font-mono); font-size:11.5px;
+    color:var(--ink-faint); margin-top:4px; }
+
+  /* ---------- Flashcards ---------- */
+  .cardgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
+  .fc{ perspective:1200px; height:150px; cursor:pointer; }
+  .fc-inner{
+    position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.2,.7,.3,1);
+    transform-style:preserve-3d;
+  }
+  .fc.flipped .fc-inner{ transform:rotateY(180deg); }
+  @media (prefers-reduced-motion:reduce){ .fc-inner{ transition:none; } }
+  .fc-face{
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:10px;
+    border:1px solid var(--rule); padding:14px; display:flex; flex-direction:column;
+    justify-content:center; overflow:auto;
+  }
+  .fc-front{ background:var(--surface-2); }
+  .fc-front .fc-term{
+    font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--ink);
+  }
+  .fc-front .fc-hint{
+    font-family:var(--font-mono); font-size:10.5px; color:var(--ink-faint); letter-spacing:.08em;
+    text-transform:uppercase; margin-top:8px;
+  }
+  .fc-back{ background:var(--accent-soft); transform:rotateY(180deg); }
+  .fc-back p{ margin:0; font-size:13.5px; line-height:1.45; color:var(--ink); }
+  .fc:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:10px; }
+
+  /* ---------- Quiz ---------- */
+  .qcount{ font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); margin-bottom:14px; }
+  .qcard{
+    border:1px solid var(--rule); border-radius:10px; padding:16px 18px; margin-bottom:14px;
+    background:var(--surface);
+  }
+  .qcard.answered.correct{ border-color:var(--good); }
+  .qcard.answered.wrong{ border-color:var(--bad); }
+  .qnum{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint); letter-spacing:.06em;
+  }
+  .qtext{ font-family:var(--font-display); font-size:16px; margin:4px 0 12px; text-wrap:balance; }
+  .opts{ display:flex; flex-direction:column; gap:7px; }
+  .opt{
+    display:flex; gap:10px; align-items:flex-start; text-align:left; width:100%;
+    background:var(--surface-2); border:1px solid var(--rule); border-radius:8px;
+    padding:9px 12px; cursor:pointer; font:inherit; font-size:14.5px; color:var(--ink);
+  }
+  .opt:hover:not(:disabled){ background:var(--surface-3); }
+  .opt .letter{
+    font-family:var(--font-mono); font-weight:700; color:var(--ink-faint); flex:none; width:1.1em;
+  }
+  .opt:disabled{ cursor:default; }
+  .opt.pick{ border-color:var(--ink-soft); }
+  .opt.right{ background:var(--good-soft); border-color:var(--good); }
+  .opt.right .letter{ color:var(--good); }
+  .opt.chosen-wrong{ background:var(--bad-soft); border-color:var(--bad); }
+  .opt.chosen-wrong .letter{ color:var(--bad); }
+  .opt:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  .explain{
+    margin-top:12px; padding:10px 12px; border-radius:8px; background:var(--surface-2);
+    font-size:14px; line-height:1.5; display:none;
+  }
+  .explain.show{ display:block; }
+  .explain b{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    display:block; margin-bottom:4px; color:var(--ink-faint); }
+  .verdict{ font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:.04em; }
+  .verdict.ok{ color:var(--good); }
+  .verdict.no{ color:var(--bad); }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font:inherit; font-family:var(--font-display); font-weight:700; font-size:14px;
+    letter-spacing:.02em; border-radius:8px; padding:10px 18px; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-primary{ background:var(--accent); color:#211205; }
+  .btn-primary:hover{ filter:brightness(1.06); }
+  .btn-primary:disabled{ opacity:.45; cursor:not-allowed; filter:none; }
+  .btn-ghost{ background:transparent; border-color:var(--rule); color:var(--ink); }
+  .btn-ghost:hover{ background:var(--surface-2); }
+  .btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  /* ---------- Exam results ---------- */
+  .resultbar{
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding:18px; border-radius:10px;
+    margin-bottom:20px; border:1px solid var(--rule); background:var(--surface-2);
+  }
+  .resultbar.pass{ border-color:var(--good); background:var(--good-soft); }
+  .resultbar.fail{ border-color:var(--bad); background:var(--bad-soft); }
+  .score{
+    font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:34px; font-weight:700;
+  }
+  .pill{
+    font-family:var(--font-mono); font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    padding:5px 12px; border-radius:99px;
+  }
+  .pill.pass{ background:var(--good); color:#0B1F15; }
+  .pill.fail{ background:var(--bad); color:#2A0D08; }
+  table.breakdown{ width:100%; border-collapse:collapse; font-size:14.5px; }
+  table.breakdown caption{ text-align:left; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+  table.breakdown th{
+    text-align:left; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-faint); border-bottom:1px solid var(--rule); padding:7px 8px;
+  }
+  table.breakdown td{ border-bottom:1px solid var(--rule); padding:8px; }
+  table.breakdown td.num, table.breakdown th.num{ text-align:right; font-family:var(--font-mono); font-variant-numeric:tabular-nums; }
+  table.breakdown .code{ font-family:var(--font-mono); font-weight:700; color:var(--accent-ink); }
+  .tablewrap{ overflow-x:auto; margin-bottom:22px; }
+
+  .examfoot{
+    display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+    margin-top:8px; padding-top:14px; border-top:1px dashed var(--rule);
+  }
+  .progresstext{ font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); }
+
+  footer.note{
+    margin-top:26px; font-size:12.5px; color:var(--ink-faint); font-family:var(--font-mono);
+    text-align:center;
+  }
+</style>
+
+<div class="app">
+  <header class="masthead">
+    <div class="brand">
+      <span class="eyebrow">APMG · JST291</span>
+      <h1 class="title">Lean IT Foundation — Guía de estudio</h1>
+    </div>
+    <div class="meta">Examen: 40 preguntas · 60 min · aprobado ≥ 26/40 (65%)</div>
+  </header>
+
+  <div class="layout">
+    <nav class="rail" id="rail" aria-label="Módulos"></nav>
+    <main class="panel" id="panel"></main>
+  </div>
+
+  <footer class="note">Contenido basado en el temario oficial Lean IT Foundation (APMG / Netmind JST291) y el examen de muestra oficial — traducido y organizado para practicar en español.</footer>
+</div>
+
+<script>
+(function(){
+
+/* ============== DATA: MODULES (theory + flashcards) ============== */
+var MODULES = [
+{
+  id:'in', code:'IN', name:'Introducción a Lean',
+  theory: '' +
+    '<h3>¿Por qué Lean?</h3>' +
+    '<p>Los objetivos habituales de TI son: añadir valor, optimizar recursos, reducir costes, acelerar el <em>time to market</em> y ganar eficiencia. Pero en la práctica, negocio y TI a menudo no se entienden: sistemas complejos y lentos, TI centrada en lo técnico más que en el problema de negocio, lenguaje distinto, sobrecarga de información, proyectos que fracasan, sistemas desconectados, datos de mala calidad, <strong>firefighting</strong> (el trabajo no planificado supera al planificado), prioridades en conflicto, retrabajo de recursos entre proyectos y foco excesivo en el coste con un ROI poco claro.</p>' +
+    '<h3>Breve historia de Lean</h3>' +
+    '<p>La producción artesanal (1887) era personalizada, cara y dependía de mano de obra muy cualificada. Con <span class="term">Taylor</span> (1910) llega la gestión científica y la productividad laboral; en 1920 la producción en masa (línea de montaje) baja costes pero es un modelo rígido. En 1950, <span class="term">Deming</span> aporta la mejora de procesos de negocio (el ciclo PDCA) a Japón, que necesitaba mejorar tras la Segunda Guerra Mundial con recursos limitados. En 1955 nace el <strong>Toyota Production System</strong> (calidad, Just-in-Time, Jidoka, mejora continua, respeto). En 2000, <span class="term">Jack Welch</span> (General Electric) demuestra el valor de la mejora continua también en servicios (<em>Lean in Service</em>). De esta evolución surge <strong>Lean + IT = Lean IT</strong>: aprendemos del pasado.</p>' +
+    '<h4>Tres metodologías relacionadas</h4>' +
+    '<ul>' +
+      '<li><strong>Six Sigma</strong> (1990, Motorola/GE): reduce la variación mediante análisis estadístico y resolución de problemas (DMAIC). Sujeto: el producto. Estilo: basado en hechos.</li>' +
+      '<li><strong>Lean Manufacturing</strong>: elimina desperdicio y optimiza procesos. Tangible, predecible, estructurado, medido. Sujeto: la máquina. Estilo: ajuste (<em>tuning</em>).</li>' +
+      '<li><strong>Lean Services</strong>: elimina desperdicio y establece el flujo de valor. Intangible, impredecible, caótico, poco medido. Sujeto: las personas. Estilo: cambio.</li>' +
+    '</ul>' +
+    '<h3>La "casa" Lean</h3>' +
+    '<p>Sobre una base de <span class="term">Estabilidad</span> y <span class="term">Robustez</span> (5S y Kaizen), se apoyan dos pilares: <span class="term">Heijunka</span> y <span class="term">Just in Time</span> (el pilar de la Entrega/Delivery) y <span class="term">Standard Working</span> y <span class="term">Jidoka</span> (el pilar de los Costes). El techo de la casa es la <strong>Calidad</strong>.</p>' +
+    '<ul>' +
+      '<li><strong>Jidoka</strong>: automatización inteligente / "automatización con toque humano" — el sistema detecta una anomalía y detiene el proceso.</li>' +
+      '<li><strong>Andon</strong>: no es solo una alerta. Andon = alerta + procedimiento + empoderamiento para actuar sobre esa alerta.</li>' +
+      '<li><strong>Just in Time</strong>: el recurso correcto, en el momento correcto, en la cantidad correcta.</li>' +
+      '<li><strong>Heijunka</strong> ("nivelación de la producción"): equilibrio entre flexibilidad y estabilidad para lograr predictibilidad.</li>' +
+      '<li><strong>Standard Working</strong>: cada paso del proceso está definido y se ejecuta siempre de la misma manera. <em>"Temo al hombre que ha practicado una patada 10.000 veces, no al que ha practicado 10.000 patadas una vez"</em> (Bruce Lee).</li>' +
+    '</ul>' +
+    '<h3>¿Por qué ser Lean?</h3>' +
+    '<ul>' +
+      '<li><strong>Satisfacción del cliente</strong>: centrarse en el valor del cliente mejora la satisfacción y el diálogo continuo con él.</li>' +
+      '<li><strong>Valor estratégico</strong>: mejores productos por mejora continua, más implicación y motivación del personal, entregas más rápidas.</li>' +
+      '<li><strong>Financiero</strong>: menos desperdicio, más tiempo libre para actividades de valor, menor plazo entre pedido y entrega (mejora el flujo de caja).</li>' +
+    '</ul>' +
+    '<p>La mala calidad tiene un precio: fuera de la organización (daño reputacional, pérdida de confianza, multas, pérdida de licencia), y dentro de la organización (retrabajo, desperdicio de recursos, interrupciones, horas extra, pérdida de espíritu de equipo). Por eso Lean prioriza la <strong>calidad dentro del proceso</strong> frente a la auditoría de calidad al final.</p>' +
+    '<h3>Valor y desperdicio (Muda)</h3>' +
+    '<p>El <strong>valor</strong> lo define siempre el cliente: es lo que el cliente está dispuesto a pagar. El <strong>desperdicio (Muda)</strong> es todo lo que hacemos que no añade valor desde la perspectiva del cliente — aunque a veces sea legalmente obligatorio (valor no añadido necesario).</p>' +
+    '<h4>Los 8 desperdicios — DOWNTIME</h4>' +
+    '<ul>' +
+      '<li><strong>D</strong>efects — Defectos</li>' +
+      '<li><strong>O</strong>verproduction — Sobreproducción</li>' +
+      '<li><strong>W</strong>aiting — Esperas</li>' +
+      '<li><strong>N</strong>on-utilized talent — Talento no utilizado</li>' +
+      '<li><strong>T</strong>ransportation — Transporte</li>' +
+      '<li><strong>I</strong>nventory — Inventario</li>' +
+      '<li><strong>M</strong>otion — Movimiento</li>' +
+      '<li><strong>E</strong>xtra-processing — Sobre-procesamiento</li>' +
+    '</ul>' +
+    '<p>Además del Muda, hay otras dos barreras al flujo de valor: <span class="term">Mura</span> (variabilidad/inconsistencia en el volumen o complejidad de la demanda, o en el resultado de los procesos) y <span class="term">Muri</span> (sobrecarga: la capacidad del equipo no puede escalar arriba o abajo según la demanda; en gran parte es un desperdicio derivado de políticas/normas de la organización).</p>' +
+    '<h3>Los 5 principios Lean</h3>' +
+    '<p><strong>Customer Value</strong> (valor del cliente) está en el centro; a su alrededor: <strong>Value Stream</strong> (evaluar qué actividades añaden valor a ojos del cliente), <strong>Flow</strong> (crear flujo continuo con JIT, evitando picos y valles), <strong>Pull</strong> (la demanda dispara la cadena de proceso; no se produce nada hasta que el siguiente proceso lo necesita realmente) y <strong>Perfection</strong> ("a la primera", prevención de defectos frente a control de calidad).</p>' +
+    '<h3>Tres tipos de actividad</h3>' +
+    '<ul>' +
+      '<li><strong>Valor añadido (VA)</strong> — el cliente está dispuesto a pagar por ello. <em>Maximizar.</em></li>' +
+      '<li><strong>Necesaria sin valor añadido (NNVA)</strong> — no añade valor para el cliente, pero es necesaria para que el trabajo de valor pueda realizarse (p. ej. finanzas, contratación, testing). <em>Minimizar.</em></li>' +
+      '<li><strong>Sin valor añadido — Muda</strong> — no añade valor ni al cliente ni al negocio (p. ej. retrabajo, esperas, inventario de incidentes). <em>Eliminar.</em></li>' +
+    '</ul>' +
+    '<h3>¿Qué es Lean IT?</h3>' +
+    '<div class="quote">"Lean IT es la extensión de los principios de Lean Manufacturing y Lean Services al desarrollo y la gestión de productos y servicios de tecnología de la información. Su objetivo es mejorar continuamente el valor entregado por las organizaciones de TI a sus clientes y el profesionalismo de las personas de TI."</div>' +
+    '<p>Lean IT es <strong>complementario</strong> a otros marcos de buenas prácticas: el marco de buenas prácticas dice <em>cómo debería organizarse</em> un proceso; las herramientas Lean sirven para <em>optimizarlo</em> y reducir desperdicio, con foco en las personas y las actitudes. <em>"Si crees que el estándar es lo mejor que puedes hacer, se acabó. El estándar es solo una base para seguir haciendo Kaizen."</em> (Taiichi Ohno).</p>' +
+    '<h4>Las 5 dimensiones de Lean IT</h4>' +
+    '<p>En el centro: <strong>Comportamiento y Actitud</strong>. Alrededor: <strong>Cliente</strong> (¿quién es? ¿qué valora?), <strong>Proceso</strong> (secuencia de actividades por las que el cliente paga), <strong>Organización</strong> (¿está estructurada de forma orientada al cliente? ¿cómo trabajamos en equipo?) y <strong>Rendimiento</strong> (¿cuánto tiempo se dedica a actividades de valor? ¿cuál es el desempeño de equipos e individuos?). Estas son las 5 dimensiones sobre las que se organiza todo este curso.</p>' +
+    '<h4>Lean IT, DevOps y Agile</h4>' +
+    '<p>Los tres comparten filosofía y se complementan: Lean IT aporta la mentalidad de mejora continua y eliminación de desperdicio; Agile aporta la forma de trabajar iterativa; DevOps conecta desarrollo y operaciones para acelerar el flujo de valor.</p>' +
+    '<h3>Kaizen y Kaikaku</h3>' +
+    '<p><strong>Kaizen</strong>: evolución incremental, mejora continua en pasos pequeños. <strong>Kaikaku</strong>: cambio radical, revolución. Lean se apoya principalmente en Kaizen, pero a veces hace falta Kaikaku.</p>' +
+    '<h4>El ciclo de Deming (PDCA)</h4>' +
+    '<p>Parte integral de la filosofía Lean y encarna el objetivo de la mejora continua:</p>' +
+    '<ul>' +
+      '<li><strong>Plan</strong> — Diseñar o revisar componentes del proceso de negocio para mejorar resultados.</li>' +
+      '<li><strong>Do</strong> — Implementar el plan y medir su desempeño.</li>' +
+      '<li><strong>Check</strong> — Evaluar las mediciones y reportar los resultados a quien decide.</li>' +
+      '<li><strong>Act</strong> — Decidir qué cambios hacen falta para mejorar el proceso.</li>' +
+    '</ul>',
+  flashcards:[
+    {t:'Muda', d:'Desperdicio: cualquier actividad que no añade valor desde la perspectiva del cliente.'},
+    {t:'Mura', d:'Variabilidad o inconsistencia en el volumen/complejidad de la demanda del cliente, o en el resultado de los procesos.'},
+    {t:'Muri', d:'Sobrecarga: incapacidad de cumplir la demanda del cliente porque la capacidad del equipo no puede escalar arriba o abajo; en gran parte es desperdicio basado en políticas.'},
+    {t:'Jidoka', d:'"Automatización con toque humano": el proceso detecta una anomalía y se detiene automáticamente para evitar propagar el defecto.'},
+    {t:'Andon', d:'No es solo una alerta: Andon = alerta + procedimiento + empoderamiento para actuar sobre el problema.'},
+    {t:'Heijunka', d:'Nivelación de la producción ("production smoothing"): equilibrio entre flexibilidad y estabilidad para lograr predictibilidad.'},
+    {t:'Just in Time (JIT)', d:'El material/recurso correcto, en el momento correcto, en el lugar correcto y en la cantidad exacta.'},
+    {t:'Standard Working', d:'Cada paso del proceso está definido y debe realizarse siempre repetidamente de la misma manera.'},
+    {t:'8 desperdicios — DOWNTIME', d:'Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion, Extra-processing.'},
+    {t:'Valor añadido (VA)', d:'Trabajo por el que el cliente está dispuesto a pagar. Se debe maximizar.'},
+    {t:'No-valor-añadido necesario (NNVA)', d:'No añade valor al cliente, pero es necesario para que el trabajo de valor pueda hacerse (p. ej. finanzas, testing). Se debe minimizar.'},
+    {t:'No-valor-añadido (Muda)', d:'No añade valor ni al cliente ni al negocio: es desperdicio puro. Se debe eliminar.'},
+    {t:'Los 5 principios Lean', d:'Customer Value (centro), Value Stream, Flow, Pull, Perfection.'},
+    {t:'Kaizen vs Kaikaku', d:'Kaizen = mejora incremental y continua. Kaikaku = cambio radical / revolución.'},
+    {t:'Ciclo de Deming (PDCA)', d:'Plan – Do – Check – Act: diseñar/revisar, implementar y medir, evaluar y reportar, decidir cambios.'},
+    {t:'Lean IT (definición)', d:'Extensión de los principios de Lean Manufacturing y Lean Services a productos/servicios de TI, para mejorar el valor entregado y el profesionalismo del personal de TI.'},
+    {t:'Las 5 dimensiones de Lean IT', d:'Comportamiento/Actitud (centro), Cliente, Proceso, Organización, Rendimiento.'}
+  ]
+},
+{
+  id:'cu', code:'CU', name:'El Cliente',
+  theory: '' +
+    '<h3>La Voz del Cliente (Voice of the Customer)</h3>' +
+    '<p>El cliente define qué es valor, en el contexto de un producto o servicio. Hay que mirar toda la experiencia del cliente de principio a fin. Existen dos tipos de cliente: <strong>la persona que usa tu producto/servicio</strong> (interno o externo) y <strong>la siguiente persona en la cadena del value stream</strong>.</p>' +
+    '<h4>Preguntas clave para analizar la Voz del Cliente</h4>' +
+    '<ul>' +
+      '<li>¿Quién es mi cliente?</li>' +
+      '<li>¿Qué quiere mi cliente?</li>' +
+      '<li>¿Qué actividades añaden valor a mi cliente?</li>' +
+      '<li>¿Por qué actividades está mi cliente dispuesto a pagar?</li>' +
+    '</ul>' +
+    '<h4>Ejemplos de lo que valora el cliente</h4>' +
+    '<ul>' +
+      '<li><strong>De un producto:</strong> rendimiento, características, conformidad, puntualidad, fiabilidad, capacidad de servicio, durabilidad, estética, reputación, integridad, precio.</li>' +
+      '<li><strong>De un servicio:</strong> competencia, fiabilidad, precisión, puntualidad, capacidad de respuesta, acceso, cortesía, comunicación, credibilidad, comprensión, precio.</li>' +
+    '</ul>' +
+    '<h3>Del valor del cliente a objetivos medibles: el árbol CTQ</h3>' +
+    '<p><span class="term">CTQ</span> (Critical to Quality) traduce el valor del cliente (VOC) en medidas de desempeño internas:</p>' +
+    '<ol>' +
+      '<li><strong>Entender la Voz del Cliente</strong> — requisitos (lo imprescindible) y deseos (lo que gustaría).</li>' +
+      '<li><strong>Determinar los CTQ</strong> — seleccionar los requisitos/deseos que más afectan a la experiencia de valor del cliente.</li>' +
+      '<li><strong>Identificar atributos clave</strong> — las variables internas que más afectan al desempeño de cada CTQ (medidas de desempeño internas).</li>' +
+    '</ol>' +
+    '<p>Ejemplo: Objetivo estratégico → "Call Center: buen servicio" (Voz del Cliente) → CTQ: "Respuesta rápida" y "Servicio personalizado" → Atributo: "Identificación del cliente &lt; 1 segundo (base de datos)".</p>' +
+    '<h3>Cómo investigar la Voz del Cliente</h3>' +
+    '<ul>' +
+      '<li><strong>Segmentación</strong> — los clientes tienen necesidades y capacidad de gasto distintas.</li>' +
+      '<li><strong>Observación</strong> — ver cómo el cliente usa el producto/servicio en su propio contexto.</li>' +
+      '<li><strong>Entrevistas</strong> — grupos focales, cara a cara o telefónicas, para obtener feedback o identificar requisitos.</li>' +
+      '<li><strong>Encuestas</strong> — recoger datos cuantitativos de una muestra amplia de clientes.</li>' +
+      '<li><strong>Redes sociales</strong> — Facebook, Twitter, etc.</li>' +
+    '</ul>' +
+    '<h3>El modelo Kano</h3>' +
+    '<p>Clasifica cómo la presencia de una característica afecta a la satisfacción del cliente:</p>' +
+    '<ul>' +
+      '<li><strong>Must Be (insatisfactor)</strong> — debe estar presente; su ausencia genera insatisfacción, pero su presencia no genera entusiasmo.</li>' +
+      '<li><strong>Performance (satisfactor)</strong> — relación directa con la Voz del Cliente: a más presencia, más satisfacción.</li>' +
+      '<li><strong>Delighters</strong> — se reciben como un extra/sorpresa positiva; su ausencia no genera insatisfacción, pero su presencia sí entusiasmo (con el tiempo, los <em>delighters</em> tienden a convertirse en expectativas básicas).</li>' +
+    '</ul>' +
+    '<h3>Otras fuentes de iniciativas de mejora</h3>' +
+    '<ul>' +
+      '<li><strong>Voice of Business</strong> — identifica mejoras que ayudan a la organización a lograr sus objetivos.</li>' +
+      '<li><strong>Voice of the Process</strong> — identifica mejoras basadas en el desempeño del proceso.</li>' +
+      '<li><strong>Voice of the Regulator</strong> — identifica mejoras basadas en requisitos legales.</li>' +
+    '</ul>',
+  flashcards:[
+    {t:'Voice of the Customer (VOC)', d:'El cliente define qué es valor; hay que entender toda su experiencia de principio a fin.'},
+    {t:'Dos tipos de cliente', d:'Quien usa tu producto/servicio (interno/externo) y quien está a continuación en el value stream.'},
+    {t:'CTQ (Critical to Quality)', d:'Traduce la Voz del Cliente (requisitos y deseos) en objetivos y medidas de desempeño internas, medibles.'},
+    {t:'Árbol CTQ', d:'Objetivo estratégico → Voz del Cliente → CTQ → Atributos clave (medidas internas).'},
+    {t:'Modelo Kano — Must Be', d:'Característica que debe estar presente; su ausencia insatisface, su presencia no entusiasma.'},
+    {t:'Modelo Kano — Performance', d:'Relación directa con la satisfacción: a más presencia, más satisfacción del cliente.'},
+    {t:'Modelo Kano — Delighters', d:'Se reciben como un extra; sorprenden positivamente al cliente (con el tiempo, se vuelven expectativa básica).'},
+    {t:'Voice of Business / Process / Regulator', d:'Otras fuentes de mejora: objetivos de la organización, desempeño del proceso y requisitos legales.'}
+  ]
+},
+{
+  id:'pr', code:'PR', name:'El Proceso',
+  theory: '' +
+    '<h3>Componentes clave de un proceso</h3>' +
+    '<p>Un proceso tiene un <strong>objetivo</strong> que se persigue mediante <strong>actividades</strong> que producen un <strong>resultado</strong> para el cliente; a nivel operativo, una <strong>transformación</strong> convierte <strong>entradas</strong> (materiales, máquinas, información, mano de obra) en <strong>salidas</strong> (bienes, información, servicios) para el cliente, todo ello gobernado por medidas, controles, responsabilidades y roles.</p>' +
+    '<p>Un proceso es <em>"una serie de acciones que deben realizarse correctamente, en la secuencia correcta y en el momento correcto, para crear valor para un cliente"</em>. A nivel abstracto toda organización tiene tres procesos: <strong>Design</strong> (del concepto al lanzamiento — desarrollo de producto/proceso), <strong>Delivery</strong> (desde la toma del pedido hasta la entrega) y <strong>Support</strong> (durante el ciclo de vida de uso del producto por el cliente).</p>' +
+    '<p>El documento que describe la mejor forma conocida de ejecutar un paso o proceso en un momento dado es el <span class="term">SOP</span> (Standard Operating Procedure). ⚠️ En TI, la resolución de incidentes se basa en demanda de <em>fallo</em> (no de valor); a ese proceso lo llamamos <strong>Failure Stream</strong>.</p>' +
+    '<h3>Push y Pull aplicados a mejorar procesos</h3>' +
+    '<ul>' +
+      '<li><strong>Push</strong> — se basa en previsión (<em>forecast</em>), genera stock y puede crear cuellos de botella (<em>bottleneck</em>).</li>' +
+      '<li><strong>Pull</strong> — el pedido del cliente dispara el trabajo (<em>customer order</em>), se apoya en Just in Time, y busca el <strong>flujo de una sola pieza</strong> (single piece flow).</li>' +
+    '</ul>' +
+    '<h3>Fase 1: SIPOC</h3>' +
+    '<p>Antes de mapear en detalle hay que definir el alcance: ¿quién es el cliente de este proceso? (VOC → CTQ). El <span class="term">SIPOC</span> (Suppliers, Input, Process, Output, Customer) es una vista de alto nivel de un proceso para acordar el alcance de un Value Stream Map: quién provee la entrada, qué entra, el proceso a analizar (sus pasos principales), qué sale, y quién recibe esa salida.</p>' +
+    '<h3>Fase 2: Análisis del proceso — Value Stream Mapping (VSM)</h3>' +
+    '<div class="quote">"El VSM es un método Lean para analizar el estado actual y diseñar un estado futuro para la serie de eventos que llevan un producto o servicio desde el inicio hasta el cliente."<cite>Wikipedia, 2014</cite></div>' +
+    '<p>Para cada paso del proceso se documenta: unidad de trabajo, <em>takt rate</em> (ritmo de la demanda), <em>lead time</em>, tiempo de máquina, tiempo de cambio (<em>changeover</em>), flujos de trabajo (% de pedidos por cada ruta) y el desperdicio identificado en cada paso.</p>' +
+    '<h4>Símbolos habituales de un VSM</h4>' +
+    '<ul>' +
+      '<li>Transporte de bienes · Inventario · Tiempo de espera · Movimiento de personas · Retrabajo · Sobre-procesamiento · Sobreproducción</li>' +
+      '<li>Flujo de información (línea discontinua) · Flujo físico (línea continua) · Proveedor externo</li>' +
+      '<li>Proceso/paso de proceso · Lead time · Problema/incidencia (#) · Opción de Kaizen</li>' +
+    '</ul>' +
+    '<p><strong>Ejemplo</strong>: en un proceso de gestión de cambios con 5 pasos (Recepción → Intake → Planificación → Entrega → Traspaso a Operaciones), el <em>lead time</em> total puede ser de 20 días (5.272 minutos) mientras que el tiempo real de proceso (<em>cycle time</em> sumado) es solo un 6,6% de ese total: el resto son esperas entre pasos. Ese es precisamente el desperdicio que Lean busca reducir.</p>' +
+    '<h4>Lead time vs Cycle time</h4>' +
+    '<ul>' +
+      '<li><strong>Lead time</strong> — el reloj empieza cuando se hace la petición y termina en la entrega (lo que percibe el cliente).</li>' +
+      '<li><strong>Cycle time</strong> — el reloj empieza cuando se comienza a trabajar en la petición y termina cuando el resultado está listo para entregar.</li>' +
+    '</ul>' +
+    '<p>¿Logramos el flujo con el VSM? La clave es <strong>Heijunka</strong>: evitar cuellos de botella, reducir Mura (variabilidad) y lograr que cada paso del proceso pueda procesar la misma cantidad de unidades de trabajo por unidad de tiempo.</p>' +
+    '<h3>5S</h3>' +
+    '<ul>' +
+      '<li><strong>Seiri / Clasificar (Sort)</strong> — eliminar herramientas, piezas e instrucciones innecesarias; conservar solo lo esencial, accesible.</li>' +
+      '<li><strong>Seiton / Ordenar (Simplify)</strong> — un lugar para cada cosa y cada cosa en su lugar, claramente indicado.</li>' +
+      '<li><strong>Seiso / Limpiar (Shine)</strong> — limpiar el puesto de trabajo y todo el equipo al final de cada turno; así es fácil saber qué va dónde.</li>' +
+      '<li><strong>Seiketsu / Estandarizar</strong> — las prácticas de trabajo deben ser consistentes: cualquiera puede trabajar en cualquier puesto con las mismas herramientas y procedimientos.</li>' +
+      '<li><strong>Shitsuke / Mantener (Sustain)</strong> — mantener y revisar los estándares; conviértelo en hábito y sigue mejorando.</li>' +
+    '</ul>',
+  flashcards:[
+    {t:'Proceso (definición)', d:'Serie de acciones que deben realizarse correctamente, en la secuencia correcta y en el momento correcto, para crear valor para un cliente.'},
+    {t:'Design / Delivery / Support', d:'Los 3 procesos abstractos de toda organización: del concepto al lanzamiento, de pedido a entrega, y soporte durante el uso.'},
+    {t:'SOP', d:'Standard Operating Procedure: documento que describe la mejor forma conocida de ejecutar un paso/proceso en un momento dado.'},
+    {t:'Failure Stream', d:'El proceso de resolver incidentes en TI: se basa en demanda de fallo, no de valor.'},
+    {t:'Push vs Pull', d:'Push: previsión, stock, cuello de botella. Pull: pedido del cliente, Just in Time, flujo de una sola pieza.'},
+    {t:'SIPOC', d:'Suppliers, Input, Process, Output, Customer: vista de alto nivel de un proceso para acordar el alcance de un VSM.'},
+    {t:'VSM (Value Stream Mapping)', d:'Método Lean para analizar el estado actual y diseñar el estado futuro del flujo que lleva un producto/servicio al cliente.'},
+    {t:'Lead time', d:'Desde que se hace la petición hasta la entrega — lo que percibe el cliente.'},
+    {t:'Cycle time', d:'Desde que empieza el trabajo sobre la petición hasta que está lista para entregar.'},
+    {t:'5S', d:'Seiri (Clasificar), Seiton (Ordenar), Seiso (Limpiar), Seiketsu (Estandarizar), Shitsuke (Mantener/disciplina).'}
+  ]
+},
+{
+  id:'pe', code:'PE', name:'Rendimiento',
+  theory: '' +
+    '<h3>Medir: de métricas a KPI</h3>' +
+    '<p>Medir el desempeño nos permite alcanzar objetivos relacionados con el valor del cliente, y es la base del ciclo de mejora PDCA. El desempeño debe poder medirse para el equipo, para los gestores y para los clientes. El árbol <strong>CTQ</strong> da el vínculo directo a qué debe medirse.</p>' +
+    '<h4>KPI (Key Performance Indicator)</h4>' +
+    '<p>Una medida que expresa el desempeño de un objetivo organizativo clave. Un KPI debe ser <strong>SMART</strong>: eSpecífico, Medible, Alcanzable (Achievable), Relevante y Acotado en el Tiempo (Time bound). Además debe: apoyar la ejecución de la estrategia, ser coherente en toda la organización (los KPI se despliegan en cascada de lo estratégico a lo operativo), ser <strong>controlable por el equipo</strong> (no por el gestor), contar con un procedimiento de medición disponible, y ser duradero en el tiempo.</p>' +
+    '<p>Cuatro cualidades de un buen sistema de KPI: <strong>foco en el cliente</strong> (contribuir al valor del cliente importa más que "cumplir" un KPI), <strong>alineación</strong> con la estrategia, <strong>medición continua</strong> (no una vez al año — gestionar la tendencia) y <strong>equilibrio</strong> a lo largo de toda la organización.</p>' +
+    '<h4>La ficha de KPI</h4>' +
+    '<p>Documenta: definición, categoría (calidad, productividad, tiempos, gestión de personas, mejora continua, financiero), nivel de uso, fórmula, proceso de recolección de datos (fuente, frecuencia, responsable), unidad de medida, línea base, objetivo, tolerancia, frecuencia de reporte, precisión de la medición, propietario del proceso e incidencias conocidas.</p>' +
+    '<h3>El tiempo, factor de producción clave en TI</h3>' +
+    '<p>Las personas son el recurso que hace que TI funcione: representan conocimiento contratado por un tiempo determinado. Dirigir el uso del tiempo permite aprovechar mejor ese conocimiento, porque tenemos <strong>control</strong> directo del coste a través del tiempo (control indirecto a través del salario), e <strong>inmediatez</strong>: podemos cambiar de inmediato en qué está trabajando alguien.</p>' +
+    '<h4>PCE / OPE — Process Cycle Efficiency</h4>' +
+    '<p>Mide el porcentaje de tiempo dedicado a actividades de valor añadido:</p>' +
+    '<p style="font-family:var(--font-mono); background:var(--surface-2); padding:8px 12px; border-radius:6px; display:inline-block;">PCE = Tiempo de Valor Añadido / Lead Time Total</p>' +
+    '<p>Del tiempo total disponible de un equipo, a menudo <strong>no más del 15–30%</strong> se dedica a actividades de valor añadido.</p>' +
+    '<h3>Habilidades y Conocimientos (Skills &amp; Knowledge)</h3>' +
+    '<p>El objetivo es <strong>equilibrar la demanda y la oferta</strong> de habilidades del equipo, para poder entregar el valor que demandan los clientes. El desequilibrio de habilidades genera inflexibilidad para asignar recursos a las tareas — es una forma de desperdicio. Por eso se impulsa un plan para desarrollar personas de perfil único (single-skilled) a <strong>multidisciplinares</strong> (multi-skilled), habitualmente con una matriz de habilidades por proceso y persona (niveles: no puede realizar la tarea → familiarizado → puede realizarla con ayuda → puede realizarla solo → puede enseñar a otros), comparada con la demanda del negocio (desde la <em>service matrix</em>) para definir un plan de acción.</p>',
+  flashcards:[
+    {t:'KPI', d:'Medida SMART (Específico, Medible, Alcanzable, Relevante, Acotado en el tiempo) del desempeño de un objetivo organizativo clave; controlable por el equipo, no por el gestor.'},
+    {t:'Requisitos de un buen sistema de KPI', d:'Foco en el cliente, alineación con la estrategia, medición continua (gestionar la tendencia), y equilibrio en toda la organización.'},
+    {t:'Ficha de KPI', d:'Documenta definición, categoría, fórmula, fuente de datos, unidad, línea base, objetivo, tolerancia, frecuencia y propietario del proceso.'},
+    {t:'Tiempo como factor de producción', d:'En TI el tiempo es el factor clave: representa el conocimiento contratado; permite control directo del coste y cambio inmediato de prioridades.'},
+    {t:'PCE (Process Cycle Efficiency)', d:'% de tiempo dedicado a valor añadido = Tiempo de Valor Añadido / Lead Time total. Habitualmente solo 15–30%.'},
+    {t:'Análisis de Habilidades y Conocimientos (S&K)', d:'Equilibra la demanda y la oferta de habilidades del equipo; el objetivo es desarrollar personal multidisciplinar (multi-skilled).'}
+  ]
+},
+{
+  id:'or', code:'OR', name:'Organización',
+  theory: '' +
+    '<h3>De la organización por funciones a la orientación al cliente</h3>' +
+    '<p>En una organización <strong>funcional (en silos)</strong>, cada función (1, 2, 3…) ejecuta sus tareas de forma aislada. En una organización <strong>orientada al cliente</strong>, equipos multifuncionales (task forces, squads) recorren todo el flujo F1 → F2 → F3 para un mismo pedido, de principio a fin.</p>' +
+    '<h3>Empoderar a la primera línea</h3>' +
+    '<p>El foco debe cambiar: de una organización que "mira hacia arriba" para saber qué hacer (jerarquía: Consejo → Alta Dirección → Mandos Intermedios → Primera Línea, con el proceso primario abajo) a una organización dirigida hacia lo que ocurre en el terreno de trabajo — es decir, mejorando los procesos primarios. En el modelo invertido, la <strong>primera línea</strong> está arriba (cerca del cliente, aportando ideas y aprendizaje), seguida del personal de soporte, con el CEO abajo dando visión y apoyo.</p>' +
+    '<h3>Gestión visual (Visual Management)</h3>' +
+    '<p>Trata de la comunicación de equipo eficaz y las actualizaciones en tiempo real. Objetivos: conectar a la dirección con la operación diaria del equipo; compartir información en un tablero para tener el estado, prioridades y problemas en tiempo real; facilitar diálogos basados en hechos; permitir ver qué tarea no avanza; comunicación consistente y eficaz; y dar al equipo ciclos de feedback diarios para aprender lecciones. En la práctica, los gestores a menudo pasan menos del 10% de su tiempo con el equipo y no saben qué está haciendo.</p>' +
+    '<h4>Los tres tableros para gestionar la operación</h4>' +
+    '<ul>' +
+      '<li><strong>Day board (tablero diario)</strong> — gestiona el trabajo del día: quién trabaja en qué, moral del equipo, consejo del día, próximo evento.</li>' +
+      '<li><strong>Week board (tablero semanal)</strong> — objetivos de la semana, KPI del equipo, barómetro del equipo, lecciones aprendidas, novedades del equipo.</li>' +
+      '<li><strong>Improvement board (tablero de mejora)</strong> — progreso en la resolución de problemas; comunica y comparte soluciones y lecciones aprendidas. Recibe como entrada los "problemas" identificados tanto en el tablero diario como en el semanal.</li>' +
+    '</ul>' +
+    '<p>El tablero diario y el semanal se retroalimentan: del semanal al diario bajan los objetivos de la semana; del diario al semanal sube el rendimiento y progreso.</p>' +
+    '<h4>Comunicación en cascada</h4>' +
+    '<p>Gracias a la cascada de tableros, la comunicación fluye rápido en ambos sentidos (de abajo arriba y de arriba abajo): diario (equipo), semanal (equipo/mandos intermedios), semanal (alta dirección) y mensual (dirección ejecutiva) — cada nivel puede "pedir apoyo" hacia arriba y "entregar apoyo" hacia abajo. Las agendas de gestión se alinean (day start diario, week start semanal, diálogo de desempeño, coaching, kaizen, reunión de mandos y de dirección) para optimizar el reparto de información.</p>' +
+    '<h3>El diálogo de desempeño</h3>' +
+    '<p>Contiene tres elementos esenciales:</p>' +
+    '<ol>' +
+      '<li><strong>Objetivo</strong> — discutir el progreso frente al objetivo y definir un objetivo SMART.</li>' +
+      '<li><strong>Ofrecer apoyo</strong> — preguntar si la persona necesita ayuda para completar el trabajo.</li>' +
+      '<li><strong>Feedback</strong> — compartir retroalimentación y sugerencias de mejora sobre cómo se desempeñó/comportó.</li>' +
+    '</ol>' +
+    '<p>El diálogo de desempeño trata de <strong>discutir el logro de objetivos ya acordados</strong>, no de que el gestor imponga la solución al empleado (eso reduce su autonomía).</p>' +
+    '<h3>Kanban (tablero de tareas)</h3>' +
+    '<p>Visualiza el flujo de trabajo en columnas (p. ej. To Do, Analysis, Development, Test, Done), mostrando de un vistazo el estado y la carga de trabajo del equipo.</p>',
+  flashcards:[
+    {t:'Silos vs orientación al cliente', d:'Silos: cada función trabaja aislada por tareas. Orientado al cliente: equipos/squads recorren todo el flujo F1→F2→F3 de principio a fin.'},
+    {t:'Empoderar la primera línea', d:'Invertir la pirámide: la primera línea conoce al cliente y debe poder actuar sin pedir permiso constante a la dirección.'},
+    {t:'Gestión visual', d:'Comunicación de equipo eficaz y actualizaciones en tiempo real mediante tableros, para conectar a la dirección con la operación diaria.'},
+    {t:'Day board', d:'Tablero diario: quién trabaja en qué, moral del equipo, problemas, consejo del día.'},
+    {t:'Week board', d:'Tablero semanal: objetivos de la semana, KPI del equipo, lecciones aprendidas.'},
+    {t:'Improvement board', d:'Tablero de mejora: progreso de la resolución de problemas; recibe como entrada los problemas del day/week board.'},
+    {t:'Diálogo de desempeño', d:'3 elementos: Objetivo (progreso frente al objetivo), Apoyo (¿necesita ayuda?), Feedback (retroalimentación sobre desempeño/comportamiento).'},
+    {t:'Kanban (tablero de tareas)', d:'Visualiza el flujo de trabajo por columnas (To Do, Analysis, Development, Test, Done).'}
+  ]
+},
+{
+  id:'ba', code:'BA', name:'Comportamiento y Actitud',
+  theory: '' +
+    '<h3>Lean es una forma de pensar y de actuar</h3>' +
+    '<p>Una mentalidad distinta: lo "bueno" no es el final — busca la perfección y el flujo; los problemas son oportunidades para aportar más valor al cliente; piensa de forma contraintuitiva (la forma habitual de hacer las cosas no siempre es la mejor); céntrate en entregar valor, no solo en recortar costes o generar beneficio; cultiva relaciones a largo plazo donde todas las partes ganen; haz que el comportamiento a corto plazo sea coherente con los objetivos a largo plazo; y mira el conjunto, no solo las partes.</p>' +
+    '<h4>Comportamiento (externo) vs Actitud (interno)</h4>' +
+    '<p><strong>Actitud</strong> — "cómo abordo la situación" (interno). <strong>Comportamiento</strong> — "cómo reacciono" (externo, observable).</p>' +
+    '<h3>Comportamientos que motivan frente a comportamientos que generan desperdicio</h3>' +
+    '<ul>' +
+      '<li><strong>Comportamientos Lean:</strong> paciencia, reflexión, calma, confianza, diálogo constructivo y feedback, compasión, comprensión, basado en hechos y validado, respeto, objetividad, escucha, compartir conocimiento y transparencia, autocrítica con humor, visibilidad.</li>' +
+      '<li><strong>Comportamientos no Lean:</strong> negatividad, revancha, ego, desconfianza o adulación excesiva, crítica destructiva, observaciones irrelevantes, cotilleo, interpretaciones, sarcasmo, prejuicio, distracción, "héroe local", cinismo, ocultación.</li>' +
+    '</ul>' +
+    '<h3>¿Qué actitud requiere Lean?</h3>' +
+    '<ul>' +
+      '<li>Creer que la mejora siempre es posible.</li>' +
+      '<li>Deseo de añadir valor a los clientes.</li>' +
+      '<li>Creer en dar el siguiente paso, por pequeño que sea.</li>' +
+      '<li>Tener mente crítica, pero aportando siempre una solución.</li>' +
+      '<li>Creer en las posibilidades de las personas, no en sus limitaciones.</li>' +
+      '<li>Creer que juntos se logra más que en solitario.</li>' +
+    '</ul>' +
+    '<h3>¿Qué es el comportamiento Lean?</h3>' +
+    '<ul>' +
+      '<li><strong>Mejora continua:</strong> "ir a ver" (Gemba) por uno mismo para entender bien la situación; las discusiones ocurren en el terreno de trabajo, frente a la situación real y con las personas realmente implicadas — no en el despacho del gestor; ajustes pequeños y concretos pueden marcar una gran diferencia; aprender forma parte de la rutina diaria.</li>' +
+      '<li><strong>Excitante y abierto:</strong> "simplemente hazlo" (Just do it); usar los 5 Porqués; un problema es una oportunidad de mejora; vivir momentos "¡ajá!" de comprensión súbita; diálogo abierto entre niveles del personal.</li>' +
+    '</ul>' +
+    '<h3>Transformación Lean y gestión del cambio: el Valle de la Desesperación</h3>' +
+    '<p>Al iniciar Lean IT, las expectativas de la gente suben rápido con los primeros resultados... hasta que llegan las primeras experiencias y decepciones y "la realidad se impone": entonces caen las expectativas (discusiones sobre el dinero invertido, dudas informales de si Lean IT fue la decisión correcta) — este mínimo se llama el <strong>Valle de la Desesperación</strong>: el momento en que la gente se desanima al no ver cumplidas sus expectativas de éxito inmediato. Con perseverancia, la realidad vuelve a acercarse a las expectativas y el proyecto madura.</p>' +
+    '<h3>El cambio de paradigma</h3>' +
+    '<table style="width:100%;border-collapse:collapse;font-size:14px;margin:10px 0;">' +
+      '<tr style="border-bottom:1px solid var(--rule);"><th style="text-align:left;padding:6px;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);">TRADICIONAL</th><th style="text-align:left;padding:6px;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);">LEAN</th></tr>' +
+      '<tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px;">Los gestores tienen todas las respuestas</td><td style="padding:6px;">El gestor hace las preguntas correctas; el equipo tiene las respuestas</td></tr>' +
+      '<tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px;">Los gestores piensan, los trabajadores ejecutan</td><td style="padding:6px;">Los gestores facilitan que los trabajadores añadan valor</td></tr>' +
+      '<tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px;">Las actividades se hacen porque se ordenan</td><td style="padding:6px;">Las actividades solo se hacen si añaden valor</td></tr>' +
+      '<tr><td style="padding:6px;">Cierta tasa de defectos es inevitable</td><td style="padding:6px;">Los defectos se pueden eliminar</td></tr>' +
+    '</table>' +
+    '<h3>Motivación (Daniel H. Pink)</h3>' +
+    '<p>Tres elementos de alta motivación: <strong>Autonomía</strong> (sentir la propiedad del trabajo — controlar tarea, tiempo, técnica y equipo), <strong>Maestría</strong> (compromiso y flujo — conectar "lo que hago" con "lo que sé hacer"; es un camino difícil y asintótico, nunca se llega del todo), y <strong>Propósito</strong> (las personas necesitan entender que su trabajo marca una diferencia).</p>' +
+    '<h3>El liderazgo de Chairman Cho de Toyota</h3>' +
+    '<ul>' +
+      '<li><strong>Ir a ver (Go See)</strong> — observar; "la alta dirección debe pasar tiempo en la planta".</li>' +
+      '<li><strong>Preguntar por qué (Ask Why)</strong> — interactuar; "usa la técnica del ¿por qué? a diario".</li>' +
+      '<li><strong>Mostrar respeto (Show Respect)</strong> — escuchar; "respeta a tu gente".</li>' +
+    '</ul>' +
+    '<div class="quote">"Muchas buenas empresas intentan practicar Kaizen y usar diversas herramientas del TPS. Pero lo importante es tener todos los elementos juntos como un sistema. Debe practicarse cada día de forma muy consistente — no a rachas — de manera concreta en el propio terreno de trabajo."<cite>Fujio Cho, presidente del Consejo, Toyota</cite></div>',
+  flashcards:[
+    {t:'Actitud vs Comportamiento', d:'Actitud = cómo abordo la situación (interno). Comportamiento = cómo reacciono (externo, observable).'},
+    {t:'Valle de la Desesperación', d:'Fase de una transformación Lean en la que las expectativas caen al no cumplirse de inmediato, tras el entusiasmo inicial y antes de la mejora sostenida.'},
+    {t:'Motivación — Autonomía', d:'Sentir la propiedad del trabajo: control sobre tarea, tiempo, técnica y equipo.'},
+    {t:'Motivación — Maestría', d:'Compromiso y flujo; conectar "lo que hago" con "lo que sé hacer". Es un camino asintótico, nunca se completa del todo.'},
+    {t:'Motivación — Propósito', d:'Las personas necesitan entender que su trabajo marca una diferencia.'},
+    {t:'Chairman Cho de Toyota', d:'"Go see, ask why, show respect" — ir a ver, preguntar por qué, mostrar respeto.'},
+    {t:'Paradigma Lean vs tradicional', d:'Lean: el gestor facilita y hace preguntas, los defectos se pueden eliminar. Tradicional: el gestor tiene todas las respuestas, los defectos son inevitables.'},
+    {t:'Gemba ("ir a ver")', d:'Ir al lugar real de trabajo para entender la situación de primera mano, en vez de discutir en el despacho del gestor.'}
+  ]
+},
+{
+  id:'ps', code:'PS', name:'Kaizen y resolución de problemas',
+  theory: '' +
+    '<h3>Kaizen: mejora continua — ¿por qué?</h3>' +
+    '<ul>' +
+      '<li>Para entregar mejor calidad de servicio.</li>' +
+      '<li>Para entregar valor más rápido.</li>' +
+      '<li>Para aumentar la rentabilidad.</li>' +
+      '<li>Para retener al mejor talento.</li>' +
+      '<li>Para dejar una huella ambiental más saludable.</li>' +
+    '</ul>' +
+    '<h3>El evento Kaizen</h3>' +
+    '<p>Un evento de bajo coste, con un grupo multifuncional (3–7 personas), enfocado en un problema a resolver o una oportunidad a aprovechar. Se justifica un evento Kaizen cuando se cumplen 3 condiciones: existe una <strong>brecha</strong> entre el desempeño actual y el deseado; la <strong>causa raíz no se entiende claramente</strong>; y la <strong>solución no está predeterminada</strong> ni es obvia la óptima.</p>' +
+    '<p>Para seleccionar el tema de un Kaizen se valoran 3 criterios: (1) resultados para el cliente o beneficio de negocio, (2) viabilidad (<em>feasibility</em>) y (3) impacto organizativo — priorizando lo que combina alta viabilidad con alto impacto ("Do" primero).</p>' +
+    '<h4>Roles en un evento Kaizen</h4>' +
+    '<ul>' +
+      '<li><strong>Patrocinador de dirección (sponsor)</strong></li>' +
+      '<li><strong>Líder Kaizen</strong></li>' +
+      '<li><strong>Miembro del equipo Kaizen</strong></li>' +
+    '</ul>' +
+    '<h3>El ciclo de mejora DMAIC</h3>' +
+    '<ul>' +
+      '<li><strong>Define (Definir)</strong> — definir el problema y fijar el objetivo. <em>Propósito:</em> acordar el alcance, las metas y los objetivos financieros/de desempeño del Kaizen. <em>Resultados:</em> el charter Kaizen completo, documentación del impacto al cliente, un mapa del proceso afectado (SIPOC), y reglas de funcionamiento del equipo. <em>Errores comunes:</em> demasiado detalle en el mapa de proceso (cubrir ~80% de los casos basta); alcance demasiado amplio (usar datos y un SIPOC refinado para reajustar el alcance, y un Pareto para priorizar la causa mayor).</li>' +
+      '<li><strong>Measure (Medir)</strong> — medir entradas, pasos clave y resultados. <em>Propósito:</em> entender a fondo el estado actual del proceso y recoger datos fiables de velocidad, calidad y coste. <em>Resultados:</em> el VSM y una actualización del charter (a veces ya surgen mejoras rápidas). <em>Errores comunes:</em> demasiados datos (usar el diagrama causa-efecto para saber qué medir); sistema de medición no válido (estudiar el proceso para diseñar un plan de recogida de datos representativo).</li>' +
+      '<li><strong>Analyze (Analizar)</strong> — analizar los datos, identificar causas raíz, plantear hipótesis. <em>Propósito:</em> identificar y verificar las causas que afectan a las variables clave de entrada/salida ligadas a los objetivos del Kaizen. <em>Resultados:</em> lista de oportunidades de mejora, análisis del antes/después, identificación y priorización de causas raíz, actualización del charter. <em>Errores comunes:</em> no verificar los supuestos (contrastarlos con distintos interesados); sacar conclusiones precipitadas (usar herramientas gráficas apropiadas para respaldar el análisis).</li>' +
+      '<li><strong>Improve (Mejorar)</strong> — desarrollar ideas, probar soluciones, estandarizar y medir resultados. <em>Propósito:</em> aprender de pilotos de las soluciones seleccionadas y ejecutar la implementación a gran escala. <em>Resultados:</em> evaluación/selección/optimización de la solución, ejecución de un piloto, plan de implementación completo, proceso mejorado, charter actualizado. <em>Errores comunes:</em> imponer una solución preferida (usar una técnica de decisión estructurada que todo el equipo pueda respaldar); subestimar el impacto del cambio en las personas (comunicar bien la solución a todos los interesados).</li>' +
+      '<li><strong>Control</strong> — controlar la implementación para asegurar sostenibilidad y estabilidad; compartir lecciones aprendidas; iniciar la siguiente iteración. <em>Propósito:</em> cerrar el trabajo Kaizen y entregar el proceso mejorado a su propietario con procedimientos para mantener las ganancias. <em>Resultados:</em> datos de antes/después de las métricas del proceso, charter completo con lecciones aprendidas y recomendaciones. <em>Errores comunes:</em> terminar demasiado pronto (definir herramientas de monitorización y acciones); mal aprovechamiento de los beneficios (considerar replicar y estandarizar vía SOP). Para evitar errores se puede usar <span class="term">Poka-yoke</span> (mecanismos a prueba de errores).</li>' +
+    '</ul>' +
+    '<h3>El método A3</h3>' +
+    '<p>¿Es literalmente una hoja de papel? Sí… y no. El A3 resume la definición del problema, el alcance, las causas raíz, las contramedidas y los resultados. Lo importante no es el formato exacto, sino que fuerza a centrarse en la <strong>causa raíz</strong> y no saltar directamente a soluciones basadas en los síntomas.</p>' +
+    '<h4>Contenido típico de un A3</h4>' +
+    '<ul>' +
+      '<li><strong>Declaración del problema</strong> — ¿cuál es el problema que está causando problemas?</li>' +
+      '<li><strong>Antecedentes</strong> — ¿por qué se decidió trabajar en este problema? ¿cuál es el problema de negocio?</li>' +
+      '<li><strong>Situación actual</strong> — con datos y visuales analizados.</li>' +
+      '<li><strong>Objetivos/metas</strong> — ¿cuál es el estado deseado?</li>' +
+      '<li><strong>Análisis de causa raíz</strong> — ¿cuáles son las causas subyacentes?</li>' +
+      '<li><strong>Contramedidas</strong> — ¿cómo se llegará al estado meta?</li>' +
+      '<li><strong>Plan de implementación</strong> — ¿cuándo se implementarán las contramedidas?</li>' +
+      '<li><strong>Seguimiento</strong> — ¿qué resultados dio el despliegue de las contramedidas?</li>' +
+    '</ul>' +
+    '<h3>Herramientas Kaizen</h3>' +
+    '<ul>' +
+      '<li><strong>Diagrama de Pareto</strong> — ordena las causas de un problema de mayor a menor contribución (regla 80/20). Se usa en Measure.</li>' +
+      '<li><strong>Diagrama de Ishikawa (espina de pescado)</strong> — organiza posibles causas por categorías (Sistema, Personas, Proceso, Política…) para "perforar" hasta la causa raíz. Se usa en Analyze.</li>' +
+      '<li><strong>5 Porqués (5 Whys)</strong> — técnica para llegar a la causa raíz preguntando "¿por qué?" repetidamente; suele combinarse con el Ishikawa.</li>' +
+    '</ul>' +
+    '<h3>Cómo prepararse para el examen Lean IT Foundation</h3>' +
+    '<ul>' +
+      '<li>Repasar el material del curso.</li>' +
+      '<li>Libro recomendado: <em>"Lean Thinking"</em> de Womack &amp; Jones.</li>' +
+      '<li>Usar el examen de muestra para practicar.</li>' +
+      '<li>Se recomiendan ~4 horas de estudio tras completar la formación.</li>' +
+      '<li><strong>Examen:</strong> 60 minutos, 40 preguntas de opción múltiple, aprobado con 65% (26/40), libro cerrado.</li>' +
+    '</ul>',
+  flashcards:[
+    {t:'Evento Kaizen', d:'Evento de bajo coste, grupo multifuncional de 3–7 personas, centrado en un problema u oportunidad concretos.'},
+    {t:'3 condiciones para un Kaizen', d:'Existe una brecha entre desempeño actual y deseado; la causa raíz no está clara; la solución no está predeterminada.'},
+    {t:'Roles en un Kaizen', d:'Patrocinador de dirección (sponsor), líder Kaizen, miembro del equipo Kaizen.'},
+    {t:'DMAIC', d:'Define, Measure, Analyze, Improve, Control: ciclo de mejora continua para resolver problemas.'},
+    {t:'Define (DMAIC)', d:'Definir el problema y el alcance; resultado clave: charter Kaizen + SIPOC del proceso.'},
+    {t:'Measure (DMAIC)', d:'Entender el estado actual y recoger datos fiables; herramienta clave: el VSM.'},
+    {t:'Analyze (DMAIC)', d:'Identificar y verificar causas raíz; herramientas clave: Ishikawa y 5 Porqués.'},
+    {t:'Improve (DMAIC)', d:'Probar y seleccionar soluciones, pilotar e implementar a gran escala.'},
+    {t:'Control (DMAIC)', d:'Asegurar que la mejora se sostiene en el tiempo; compartir lecciones aprendidas.'},
+    {t:'A3', d:'Resumen de problema, alcance, causas raíz, contramedidas y resultados; obliga a centrarse en la causa raíz, no en el síntoma.'},
+    {t:'Diagrama de Pareto', d:'Ordena las causas de un problema de mayor a menor contribución (regla 80/20).'},
+    {t:'Diagrama de Ishikawa', d:'Diagrama de espina de pescado; organiza posibles causas por categorías para encontrar la causa raíz.'},
+    {t:'5 Porqués', d:'Técnica de análisis de causa raíz: preguntar "¿por qué?" repetidamente hasta llegar al origen real del problema.'},
+    {t:'Poka-yoke', d:'Mecanismo a prueba de errores para prevenir equivocaciones no intencionadas.'}
+  ]
+}
+];
+
+/* ============== DATA: 40 QUESTIONS (original exam order) ============== */
+var QUESTIONS = [
+{id:1, m:'ba', q:'Chairman Cho de Toyota tenía un mensaje clave sobre el Liderazgo Lean. ¿Cuál era ese mensaje?',
+ o:['Definir objetivos estratégicos','Ir a ver, preguntar por qué, mostrar respeto','Asegurar la participación activa de todos en la organización','Apoyar a los empleados para desarrollar habilidades de resolución de problemas'],
+ c:1, e:'Es el mensaje central de Chairman Cho ("Go see, ask why, show respect"). Las demás opciones son responsabilidades de liderazgo o de la transformación Lean en general, pero no el mensaje específico de Cho.'},
+{id:2, m:'in', q:'¿Cómo simplifica el Flow (flujo) la planificación de la demanda?',
+ o:['Congelando el horizonte de planificación','Cumpliendo las necesidades del cliente','Acortando el horizonte de planificación','Eliminando el esfuerzo desperdiciado'],
+ c:2, e:'Con el flujo de una sola pieza (single piece flow), la cantidad de planificación necesaria es mucho menor porque se acorta el horizonte de planificación.'},
+{id:3, m:'or', q:'En una transformación Lean, ¿cómo puede TI actuar como catalizador principal del cambio?',
+ o:['Todo el mundo necesita ordenadores','La información habilita todos los Value Streams','El acceso a Internet es vital','TI afecta a todo el mundo'],
+ c:1, e:'TI es vital para unos flujos de información eficientes, y la información es necesaria para que el cambio ocurra. Las demás afirmaciones pueden ser ciertas, pero no explican por qué TI es catalizador del cambio.'},
+{id:4, m:'pr', q:'En un sistema Pull (arrastre), ¿qué significa una ranura vacía (empty slot)?',
+ o:['Que el Kanban no funciona','Que hay un problema más adelante en la línea de producción','Es una señal de reposición','Es lo mismo que un Andon'],
+ c:2, e:'Una ranura vacía siempre es una señal de que se requiere reposición — sea cual sea la causa concreta.'},
+{id:5, m:'ps', q:'¿En qué fase de DMAIC se realizaría un Análisis de Causa Raíz?',
+ o:['Define','Measure','Analyze','Improve'],
+ c:2, e:'La fase Analyze busca entender las causas raíz de un problema; no se puede analizar lo que aún no se ha definido ni medido, y en Improve la causa raíz ya se conoce.'},
+{id:6, m:'ba', q:'Aprender de los errores es una forma en que una organización de TI puede progresar. ¿Cuál de las siguientes afirmaciones representa la forma Lean de tratar los errores?',
+ o:['En TI, somos humanos, todos cometemos errores','La gestión de TI debe centrarse en asegurar que se realiza el trabajo de mejora','Es más importante saber QUIÉN cometió un error que POR QUÉ ocurrió','Los errores son una parte inevitable del trabajo, pero deben tomarse en serio'],
+ c:1, e:'Lean IT ve un papel central de la gestión en institucionalizar las actividades de mejora, no en buscar culpables ni en resignarse a que los errores sean inevitables.'},
+{id:7, m:'or', q:'¿Qué tablero (board) contiene todos los KPI necesarios para dirigir la organización?',
+ o:['Day board (tablero diario)','Week board (tablero semanal)','Month board (tablero mensual)','Improvement board (tablero de mejora)'],
+ c:1, e:'Los KPI del equipo son uno de los elementos que se registran en el tablero semanal. El tablero diario sirve para dirigir el trabajo día a día; no existe un "tablero mensual"; el de mejora hace seguimiento de la resolución de problemas, no de KPI.'},
+{id:8, m:'ps', q:'¿Qué muestra un diagrama de Pareto?',
+ o:['Un análisis del flujo del value stream','La distribución de la calidad del producto','Los porcentajes de los distintos tipos de desperdicio en un proceso','Las causas de un problema o condición, de mayor a menor contribución'],
+ c:3, e:'El diagrama de Pareto ordena las causas de un problema o condición de mayor a menor contribución (regla 80/20).'},
+{id:9, m:'in', q:'¿Cuál es una posible barrera importante para el flujo de valor?',
+ o:['Muri','Poka-yoke','Kanban','Jidoka'],
+ c:0, e:'Muri (sobrecarga), junto con Mura (variabilidad), es una barrera importante que puede llevar a Muda y a la producción de productos defectuosos. Poka-yoke, Kanban y Jidoka son herramientas Lean, no barreras.'},
+{id:10, m:'in', q:'¿Cuál es la definición de sobrecarga (overburden / Muri)?',
+ o:['Incapacidad para resolver problemas','Incapacidad para satisfacer la demanda del cliente con un recurso determinado','Incapacidad para gestionar personas según el liderazgo situacional','Falta de comprensión de los retos de la organización de TI'],
+ c:1, e:'Es la definición correcta de sobrecarga (Muri).'},
+{id:11, m:'pe', q:'¿Cuál es el factor de producción clave dentro de TI?',
+ o:['Calidad','Tiempo','Dinero','Servicios'],
+ c:1, e:'El tiempo representa la cantidad de conocimiento y habilidades trabajando dentro de TI, y es el factor sobre el que se tiene control directo e inmediato.'},
+{id:12, m:'pe', q:'¿Cuál es el propósito principal de un análisis de Habilidades y Conocimientos (Skills & Knowledge)?',
+ o:['Desarrollo personal','Equilibrar la demanda y la oferta','Mejorar habilidades y conocimientos','Aumentar la flexibilidad'],
+ c:1, e:'El objetivo es que las habilidades y conocimientos disponibles coincidan con lo necesario para entregar el valor requerido a los clientes; las demás opciones pueden ser un resultado, pero no el propósito principal.'},
+{id:13, m:'cu', q:'¿Cuál es el propósito de un árbol CTQ (Critical to Quality)?',
+ o:['Describe los sistemas técnicos críticos dentro de TI para prestar servicios','Traduce las limitaciones de TI en valor para el cliente','Traduce las expectativas del cliente en objetivos y actividades internas medibles','Describe los KPI críticos necesarios para satisfacer el valor del cliente'],
+ c:2, e:'Es la definición de un árbol CTQ. Los KPI son un resultado posterior de este proceso, no el propósito del árbol CTQ.'},
+{id:14, m:'or', q:'¿Cuál es el propósito de una tarjeta Kanban?',
+ o:['Comunicar el estado del producto o servicio al cliente','Informar al proceso sobre el estado del producto o servicio','Visualizar los agujeros (loop holes) del proceso','Un sistema manual de respaldo por si falla el sistema informático'],
+ c:1, e:'Durante el proceso de producción se añade información a la tarjeta Kanban, mostrando con precisión el estado del producto para el propio proceso — no directamente para el cliente.'},
+{id:15, m:'pe', q:'¿Cuál es el propósito de un análisis de Habilidades y Conocimientos (S&K)?',
+ o:['Producir Planes de Desarrollo Personal alineados con S&K','Permitir la segregación de funciones según la demanda del cliente y S&K','Desarrollar S&K según las preferencias de los empleados','Desarrollar la cantidad adecuada de S&K para ofrecer el valor que los clientes esperan de TI'],
+ c:3, e:'Un análisis S&K debe llevar al desarrollo de equipos multidisciplinares (multi-skilled) capaces de entregar el valor que esperan los clientes; las demás son, como mucho, efectos secundarios.'},
+{id:16, m:'pe', q:'¿Qué herramienta se usaría para entender cuánto tiempo se dedica a actividades de valor añadido?',
+ o:['DMAIC','SIPOC','PCE (Process Cycle Efficiency)','Critical to Quality'],
+ c:2, e:'El PCE se usa específicamente para medir el uso del tiempo (tiempo de valor añadido / lead time total). DMAIC resuelve problemas, SIPOC delimita el alcance del proceso, y CTQ define los requisitos del cliente.'},
+{id:17, m:'ba', q:'¿Cuándo ocurre el "Valle de la Desesperación" (Valley of Despair)?',
+ o:['En el momento en que la dirección decide detener el proyecto','Cuando queda claro que los cambios no lograrán el principio Lean de Perfección','Cuando las personas entienden los cambios en su forma de trabajar debido a Lean','Cuando las personas se desaniman por la falta de éxito percibida respecto al cambio'],
+ c:3, e:'Es el momento en que las personas se desilusionan con un cambio al no ver cumplidas sus expectativas iniciales de éxito inmediato.'},
+{id:18, m:'ba', q:'Cuando el trabajo NO se realiza de forma eficiente, ¿cuál es la causa MÁS probable?',
+ o:['TI','Falta de liderazgo','Procesos deficientes','Falta de información'],
+ c:2, e:'Los procesos deficientes son una de las causas principales de la ineficiencia. Las demás pueden contribuir, pero no son la causa más probable.'},
+{id:19, m:'in', q:'¿Qué actividad debería describirse como No-Valor-Añadido Necesaria (o de Negocio) (NNVA)?',
+ o:['Retrabajo (Rework)','Finanzas','Sobreproducción','Tiempo de espera'],
+ c:1, e:'Finanzas es una actividad NNVA: necesaria para el negocio, aunque no añade valor directo al cliente. Las otras tres son desperdicio puro (Muda), no NNVA.'},
+{id:20, m:'cu', q:'¿Cuáles son ejemplos de lo que un cliente valora en un servicio?',
+ o:['Precio, Fiabilidad y Puntualidad','Diseño, Características y Disponibilidad','Innovación, Integridad y Operación','Modelo, Logro y Precisión'],
+ c:0, e:'Corresponde a la lista oficial de valores de cliente para servicios (Pricing, Reliability, Timeliness, entre otros).'},
+{id:21, m:'in', q:'¿Cuál es una definición de sobrecarga (Muri)?',
+ o:['Los gestores no son capaces de planificar correctamente','Incapacidad de satisfacer la demanda del cliente debido a cargas de trabajo poco realistas sobre las personas','Los empleados no tienen certeza de qué hacer a continuación','Los ciclos largos de actualización de sistemas fomentan soluciones alternativas de los usuarios'],
+ c:1, e:'Muri significa no tener los recursos adecuados disponibles en el lugar o momento correcto; las demás describen otros problemas (falta de datos, falta de claridad, workarounds), no Muri en sí.'},
+{id:22, m:'in', q:'¿Cuál es una forma de desperdicio?',
+ o:['Programar software','Crear y gestionar un plan de proyecto','Definir especificaciones del sistema','Gestionar la lista de cambios de inventario'],
+ c:3, e:'Gestionar el inventario (por ejemplo, un backlog grande de incidentes) es en sí mismo desperdicio. Las otras tres actividades añaden valor.'},
+{id:23, m:'ps', q:'¿Cuál es una herramienta Lean para investigar la causa raíz de los problemas?',
+ o:['3 Whys','4 Whys','5 Whys','6 Whys'],
+ c:2, e:'La herramienta estándar se llama "5 Porqués" (5 Whys).'},
+{id:24, m:'in', q:'¿Cuál es un principio de Lean?',
+ o:['La organización debe ser rentable','El valor lo define el cliente','Los empleados están satisfechos','Los clientes están satisfechos'],
+ c:1, e:'"El valor lo define el cliente" (Customer Value) es uno de los 5 principios Lean. Las demás pueden ser deseables, pero no son principios Lean formales.'},
+{id:25, m:'cu', q:'¿Cuál es un propósito de las herramientas de Voice of the Customer (VoC)?',
+ o:['Establecer prioridades y objetivos coherentes con las necesidades del cliente','Identificar áreas donde se puede empezar a eliminar desperdicio','Documentar y categorizar los costes asociados al desperdicio','Facilitar la retroalimentación de resultados resumidos a los contactos de VoC'],
+ c:0, e:'Es el propósito principal de las herramientas VoC: fijar prioridades y objetivos alineados con lo que el cliente necesita.'},
+{id:26, m:'ps', q:'¿Cuál es un objetivo de la fase Improve (Mejorar) de DMAIC?',
+ o:['Desarrollar Planes de Control de Proceso','Hacer mejoras rápidas (quick-hit)','Implementar soluciones','Crear un mapa de proceso de alto nivel'],
+ c:2, e:'Las soluciones se implementan en la fase Improve. Los planes de control pertenecen a Control, las mejoras rápidas suelen surgir ya en Measure, y el mapa de alto nivel se crea en Define.'},
+{id:27, m:'or', q:'¿Qué es entrada del tablero de mejora y salida del tablero diario?',
+ o:['Rendimiento y Progreso','KPI del equipo','Objetivos de la semana','Problemas'],
+ c:3, e:'Los problemas se identifican durante el day start (tablero diario) y se usan como entrada del tablero de mejora.'},
+{id:28, m:'cu', q:'¿Qué es MÁS probablemente un requisito del cliente para un producto especificado?',
+ o:['Construido de forma eficiente','Barato de construir','Cumple las expectativas','Fiable en servicio'],
+ c:2, e:'"Cumple las expectativas" es la definición de ofrecer valor a un cliente. Las demás opciones son, en todo caso, secundarias o no siempre ciertas.'},
+{id:29, m:'in', q:'¿Cuál NO es una forma de desperdicio?',
+ o:['Pasar trabajo al siguiente en la línea sin explicación','Resolver un incidente','Implementar cambios no autorizados','Formar a los usuarios finales'],
+ c:3, e:'Dar conocimientos y habilidades a los usuarios finales es una actividad de valor añadido. Las otras tres sí generan desperdicio (falta de traspaso claro, retrabajo por incidentes, cambios sin autorizar).'},
+{id:30, m:'in', q:'¿Cuál NO es un objetivo de Lean?',
+ o:['Mejorar el valor para el cliente','Mejora continua','Reducir el desperdicio','Aumentar los beneficios'],
+ c:3, e:'El beneficio puede ser (con suerte) un resultado de aplicar Lean, pero no es la razón de ser de Lean; las otras tres sí son objetivos explícitos de Lean.'},
+{id:31, m:'pe', q:'¿Cuál NO es un requisito de un KPI?',
+ o:['Apoya la ejecución de la estrategia','Coherente en toda la organización','Debe ser propiedad del gestor (manager)','Controlable por el equipo'],
+ c:2, e:'Los KPI son propiedad de los equipos, no del gestor. Las demás sí son requisitos de un buen KPI.'},
+{id:32, m:'in', q:'¿Cuál NO es una actividad de Valor Añadido?',
+ o:['Coordinar la resolución de un incidente','Realizar un análisis de impacto','Crear un plan de proyecto','Programar software'],
+ c:0, e:'Coordinar la resolución de un incidente es una actividad SIN valor añadido: los incidentes son demanda de fallo ("failure demand"), no demanda de valor. Las otras tres sí añaden valor.'},
+{id:33, m:'in', q:'¿Cuál NO es un objetivo de Six Sigma?',
+ o:['Análisis estadístico','Resolución de problemas','Cambio de comportamiento','Reducción de la variabilidad'],
+ c:2, e:'Six Sigma no se centra en cambiar la actitud y el comportamiento de las personas (eso es más propio de Lean); sí se centra en análisis estadístico, resolución de problemas (DMAIC) y reducción de la variabilidad.'},
+{id:34, m:'ba', q:'¿Cuál es el comportamiento MÁS importante dentro de Lean?',
+ o:['Aprender','Hablar','Escuchar','Ver'],
+ c:0, e:'Lean trata de la mejora continua, y la única forma de mejorar de verdad es seguir aprendiendo; hablar, escuchar y ver son importantes, pero no son en sí mismos el comportamiento clave.'},
+{id:35, m:'ps', q:'¿Qué herramienta usarías en la fase Analyze de DMAIC?',
+ o:['SIPOC','Diagrama de Ishikawa','Value Stream Map','Critical to Quality'],
+ c:1, e:'El diagrama de Ishikawa (espina de pescado) es una herramienta de análisis de causa raíz, propia de la fase Analyze. SIPOC y CTQ se usan en Define; el VSM en Measure.'},
+{id:36, m:'pr', q:'¿Qué herramienta usarías en la fase Measure de DMAIC?',
+ o:['SIPOC','Standard Operating Procedure','Diagrama de Ishikawa','Value Stream Map'],
+ c:3, e:'El Value Stream Map se usa para registrar las mediciones del proceso en la fase Measure. SIPOC se usa en Define, el Ishikawa en Analyze, y el SOP en Control.'},
+{id:37, m:'or', q:'¿Qué temas NO deberían tratarse por el gestor durante un diálogo de desempeño con un empleado?',
+ o:['Discutir objetivos nuevos y en curso para el empleado','Ofrecer apoyo al empleado para el logro de sus objetivos','Discutir soluciones con el empleado para que pueda cumplir sus objetivos','Dar retroalimentación sobre cómo se desempeñó o comportó el empleado'],
+ c:2, e:'El diálogo de desempeño trata de discutir el logro de los objetivos ya acordados, no de que el gestor aporte o imponga el contenido de la solución — eso reduce la autonomía del empleado.'},
+{id:38, m:'or', q:'¿Por qué es esencial empoderar a los empleados de primera línea en una organización Lean?',
+ o:['Porque la primera línea es parte del proceso primario','Para aprovechar el conocimiento profesional de los empleados de primera línea','Para asegurar que los empleados de primera línea conocen las necesidades del cliente','Porque la primera línea tiene su propia autonomía'],
+ c:2, e:'La clave de una primera línea eficaz es que conozca lo que quiere el cliente y pueda entregar el valor requerido sin necesitar permiso constante de la dirección.'},
+{id:39, m:'ba', q:'¿Por qué es importante que la dirección de TI comprenda profundamente los principios y métodos de Lean?',
+ o:['Para crear mejoras sostenibles en los servicios de TI','Para entregar resultados rápidamente a los clientes de TI','Para fijar objetivos a los equipos dentro de TI','Para asegurar que los accionistas obtienen el valor que esperan'],
+ c:0, e:'Cuando la dirección comprende Lean de verdad, deja de ser algo "temporal" para el resto de la organización y las mejoras se vuelven sostenibles.'},
+{id:40, m:'pr', q:'¿Por qué debería introducirse un sistema Kanban?',
+ o:['Para controlar el inicio de nuevo trabajo','Para visualizar lo que se ha desarrollado','Para gestionar el inventario de incidentes','Para asegurar que no se olvida ninguna unidad de trabajo'],
+ c:0, e:'El sistema Kanban asegura que el nuevo trabajo se inicia únicamente cuando el Kanban lo activa (señal de tipo pull), controlando así el inicio del trabajo.'}
+];
+
+/* ============== STATE ============== */
+var state = { view:'in', sub:'theory', answers:{}, examAnswers:{}, examDone:false };
+var byModule = {};
+MODULES.forEach(function(m){ byModule[m.id] = QUESTIONS.filter(function(q){ return q.m === m.id; }); });
+
+/* ============== RENDER: RAIL ============== */
+function moduleDot(id){
+  var qs = byModule[id], answered = 0, wrong = 0;
+  qs.forEach(function(q){
+    var a = state.answers[q.id];
+    if(a !== undefined){ answered++; if(a !== q.c) wrong++; }
+  });
+  if(answered === 0) return '';
+  if(answered < qs.length) return 'some';
+  return wrong > 0 ? 'done wrong' : 'done';
+}
+
+function renderRail(){
+  var rail = document.getElementById('rail');
+  var html = '<div class="rail-heading">Módulos del temario</div>';
+  MODULES.forEach(function(m){
+    var active = (state.view === m.id) ? ' active' : '';
+    var dot = moduleDot(m.id);
+    html += '<button class="rail-item' + active + '" data-view="' + m.id + '">' +
+      '<span class="code">' + m.code + '</span>' +
+      '<span class="label">' + m.name + '</span>' +
+      '<span class="dot ' + dot + '"></span>' +
+    '</button>';
+  });
+  html += '<div class="rail-exam">' +
+    '<button class="rail-item' + (state.view === 'exam' ? ' active' : '') + '" data-view="exam">' +
+      '<span class="code">40</span><span class="label">Simulacro completo</span>' +
+      '<span class="dot ' + (state.examDone ? (examPass() ? 'done' : 'done wrong') : (Object.keys(state.examAnswers).length ? 'some' : '')) + '"></span>' +
+    '</button>' +
+  '</div>';
+  rail.innerHTML = html;
+  Array.prototype.forEach.call(rail.querySelectorAll('.rail-item'), function(btn){
+    btn.addEventListener('click', function(){
+      state.view = btn.getAttribute('data-view');
+      if(state.view !== 'exam') state.sub = 'theory';
+      renderAll();
+    });
+  });
+}
+
+/* ============== RENDER: MODULE PANEL ============== */
+function renderModulePanel(mod){
+  var panel = document.getElementById('panel');
+  var qs = byModule[mod.id];
+  var subtabs = [
+    {id:'theory', label:'Teoría'},
+    {id:'cards', label:'Conceptos clave (' + mod.flashcards.length + ')'},
+    {id:'quiz', label:'Práctica (' + qs.length + ' preguntas)'}
+  ];
+  var html = '<div class="panel-head"><h2>' + mod.code + ' — ' + mod.name + '</h2>' +
+    '<span class="sub">' + qs.length + ' preguntas del examen de muestra pertenecen a este módulo</span></div>';
+  html += '<div class="subtabs">';
+  subtabs.forEach(function(t){
+    html += '<button class="subtab' + (state.sub === t.id ? ' active' : '') + '" data-sub="' + t.id + '">' + t.label + '</button>';
+  });
+  html += '</div><div class="panel-body" id="panel-body"></div>';
+  panel.innerHTML = html;
+
+  Array.prototype.forEach.call(panel.querySelectorAll('.subtab'), function(btn){
+    btn.addEventListener('click', function(){
+      state.sub = btn.getAttribute('data-sub');
+      renderAll();
+    });
+  });
+
+  var body = document.getElementById('panel-body');
+  if(state.sub === 'theory'){
+    body.innerHTML = '<div class="theory">' + mod.theory + '</div>';
+  } else if(state.sub === 'cards'){
+    var cardsHtml = '<div class="cardgrid">';
+    mod.flashcards.forEach(function(c, i){
+      cardsHtml += '<div class="fc" tabindex="0" role="button" aria-label="Tarjeta: ' + c.t + '. Pulsa para ver la definición.">' +
+        '<div class="fc-inner">' +
+          '<div class="fc-face fc-front"><div class="fc-term">' + c.t + '</div><div class="fc-hint">Toca para ver la definición</div></div>' +
+          '<div class="fc-face fc-back"><p>' + c.d + '</p></div>' +
+        '</div></div>';
+    });
+    cardsHtml += '</div>';
+    body.innerHTML = cardsHtml;
+    Array.prototype.forEach.call(body.querySelectorAll('.fc'), function(el){
+      function toggle(){ el.classList.toggle('flipped'); }
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', function(ev){ if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); toggle(); } });
+    });
+  } else if(state.sub === 'quiz'){
+    renderQuiz(body, qs);
+  }
+}
+
+function renderQuiz(body, qs){
+  var answeredCount = 0;
+  qs.forEach(function(q){ if(state.answers[q.id] !== undefined) answeredCount++; });
+  var html = '<div class="qcount">Progreso: ' + answeredCount + ' / ' + qs.length + ' respondidas</div>';
+  qs.forEach(function(q, idx){
+    html += renderQuestionCard(q, idx + 1, state.answers[q.id]);
+  });
+  body.innerHTML = html;
+  wireQuestionCards(body, qs, 'answers');
+}
+
+var LETTERS = ['a','b','c','d'];
+
+function renderQuestionCard(q, num, picked){
+  var answered = picked !== undefined;
+  var cls = 'qcard' + (answered ? (picked === q.c ? ' answered correct' : ' answered wrong') : '');
+  var html = '<div class="' + cls + '" data-qid="' + q.id + '">' +
+    '<div class="qnum">Pregunta ' + num + '</div>' +
+    '<div class="qtext">' + q.q + '</div>' +
+    '<div class="opts">';
+  q.o.forEach(function(opt, i){
+    var optCls = 'opt';
+    if(answered){
+      if(i === q.c) optCls += ' right';
+      else if(i === picked) optCls += ' chosen-wrong';
+    }
+    html += '<button class="' + optCls + '" data-i="' + i + '"' + (answered ? ' disabled' : '') + '>' +
+      '<span class="letter">' + LETTERS[i] + '</span><span>' + opt + '</span></button>';
+  });
+  html += '</div>';
+  html += '<div class="explain' + (answered ? ' show' : '') + '">' +
+    '<span class="verdict ' + (answered ? (picked === q.c ? 'ok' : 'no') : '') + '">' + (answered ? (picked === q.c ? 'CORRECTO' : 'INCORRECTO') : '') + '</span>' +
+    '<b>Explicación</b>' + q.e +
+  '</div></div>';
+  return html;
+}
+
+function wireQuestionCards(container, qs, bucket){
+  Array.prototype.forEach.call(container.querySelectorAll('.qcard'), function(card){
+    var qid = parseInt(card.getAttribute('data-qid'), 10);
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-i'), 10);
+        state[bucket][qid] = i;
+        renderAll();
+      });
+    });
+  });
+}
+
+/* ============== RENDER: EXAM (simulacro) ============== */
+var SYLLABUS_NAMES = {in:'Introducción a Lean', cu:'El Cliente', pr:'El Proceso', pe:'Rendimiento', or:'Organización', ba:'Comportamiento y Actitud', ps:'Kaizen / Resolución de problemas'};
+
+function examScore(){
+  var correct = 0;
+  QUESTIONS.forEach(function(q){ if(state.examAnswers[q.id] === q.c) correct++; });
+  return correct;
+}
+function examPass(){ return examScore() >= 26; }
+
+function renderExamPanel(){
+  var panel = document.getElementById('panel');
+  var answered = Object.keys(state.examAnswers).length;
+  var html = '<div class="panel-head"><h2>Simulacro completo — 40 preguntas</h2>' +
+    '<span class="sub">Estilo examen real · aprobado ≥ 26/40 (65%)</span></div>' +
+    '<div class="panel-body" id="panel-body"></div>';
+  panel.innerHTML = html;
+  var body = document.getElementById('panel-body');
+
+  if(state.examDone){
+    body.innerHTML = renderResults() + renderExamQuestions(true);
+    wireQuestionCards(body, QUESTIONS, 'examAnswers');
+    var retry = document.getElementById('btn-retry');
+    if(retry) retry.addEventListener('click', function(){
+      state.examAnswers = {}; state.examDone = false; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
+    });
+    return;
+  }
+
+  var html2 = '<div class="qcount">Progreso: ' + answered + ' / 40 respondidas — la corrección y las explicaciones aparecerán al pulsar "Corregir simulacro".</div>';
+  QUESTIONS.forEach(function(q, idx){
+    html2 += renderExamQuestionUnanswered(q, idx + 1);
+  });
+  html2 += '<div class="examfoot">' +
+    '<span class="progresstext">' + answered + ' / 40 respondidas</span>' +
+    '<button class="btn btn-primary" id="btn-correct"' + (answered < 40 ? ' disabled' : '') + '>Corregir simulacro</button>' +
+  '</div>';
+  body.innerHTML = html2;
+
+  Array.prototype.forEach.call(body.querySelectorAll('.qcard'), function(card){
+    var qid = parseInt(card.getAttribute('data-qid'), 10);
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(btn){
+      btn.addEventListener('click', function(){
+        var i = parseInt(btn.getAttribute('data-i'), 10);
+        state.examAnswers[qid] = i;
+        renderAll();
+      });
+    });
+  });
+  var correctBtn = document.getElementById('btn-correct');
+  if(correctBtn) correctBtn.addEventListener('click', function(){
+    state.examDone = true; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
+  });
+}
+
+function renderExamQuestionUnanswered(q, num){
+  var picked = state.examAnswers[q.id];
+  var html = '<div class="qcard" data-qid="' + q.id + '">' +
+    '<div class="qnum">Pregunta ' + num + ' · ' + q.m.toUpperCase() + '</div>' +
+    '<div class="qtext">' + q.q + '</div><div class="opts">';
+  q.o.forEach(function(opt, i){
+    var cls = 'opt' + (picked === i ? ' pick' : '');
+    html += '<button class="' + cls + '" data-i="' + i + '"><span class="letter">' + LETTERS[i] + '</span><span>' + opt + '</span></button>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderExamQuestions(withAnswers){
+  var html = '<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 12px;">Revisión pregunta por pregunta</h3>';
+  QUESTIONS.forEach(function(q, idx){
+    html += renderQuestionCard(q, idx + 1, state.examAnswers[q.id]);
+  });
+  return html;
+}
+
+function renderResults(){
+  var score = examScore();
+  var pass = examPass();
+  var breakdown = {};
+  MODULES.forEach(function(m){ breakdown[m.id] = {correct:0, total:0}; });
+  QUESTIONS.forEach(function(q){
+    breakdown[q.m].total++;
+    if(state.examAnswers[q.id] === q.c) breakdown[q.m].correct++;
+  });
+  var html = '<div class="resultbar ' + (pass ? 'pass' : 'fail') + '">' +
+    '<div class="score">' + score + ' <span style="font-size:16px;color:var(--ink-soft);">/ 40</span></div>' +
+    '<span class="pill ' + (pass ? 'pass' : 'fail') + '">' + (pass ? 'Aprobado' : 'No aprobado') + '</span>' +
+    '<span style="font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);">Umbral para aprobar: 26 / 40 (65%)</span>' +
+    '<span style="flex:1;"></span>' +
+    '<button class="btn btn-ghost" id="btn-retry">Repetir simulacro</button>' +
+  '</div>';
+  html += '<div class="tablewrap"><table class="breakdown">' +
+    '<caption>Desglose por área del temario</caption>' +
+    '<thead><tr><th>Código</th><th>Área</th><th class="num">Puntuación</th><th class="num">Preguntas</th></tr></thead><tbody>';
+  MODULES.forEach(function(m){
+    var b = breakdown[m.id];
+    html += '<tr><td class="code">' + m.code + '</td><td>' + m.name + '</td>' +
+      '<td class="num">' + b.correct + '</td><td class="num">' + b.total + '</td></tr>';
+  });
+  html += '<tr><td></td><td style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);">Total</td>' +
+    '<td class="num" style="font-weight:700;">' + score + '</td><td class="num" style="font-weight:700;">40</td></tr>';
+  html += '</tbody></table></div>';
+  return html;
+}
+
+/* ============== MAIN RENDER ============== */
+function renderAll(){
+  renderRail();
+  if(state.view === 'exam'){ renderExamPanel(); }
+  else {
+    var mod = MODULES.filter(function(m){ return m.id === state.view; })[0];
+    renderModulePanel(mod);
+  }
+}
+
+renderAll();
+})();
+</script>
