@@ -10,4 +10,4 @@ Abre `index.html` en cualquier navegador (no requiere servidor ni instalación).
 
 El contenido teórico está basado en el temario oficial *Lean IT Foundation (APMG / Netmind, JST291)* y las preguntas de práctica proceden del *Sample Paper* oficial de APMG, traducidos y reorganizados por módulo para estudio personal.
 
-> El *Sample Paper* de APMG incluye el aviso: *"This paper remains the property of The APM Group (APMG). This document is not to be re-produced or re-sold without express permission from The APM Group Ltd."* Por eso este repositorio es **privado** y de uso personal — no debe hacerse público ni redistribuirse.
+> Tanto el manual del curso (Netmind) como el *Sample Paper* de APMG incluyen avisos de copyright que restringen su reproducción/distribución. Este sitio se publica como apunte de estudio personal; si eres el titular de esos derechos y quieres que se retire, contacta y se elimina sin problema.
