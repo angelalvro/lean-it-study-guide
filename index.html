@@ -656,8 +656,210 @@ var QUESTIONS = [
  c:0, e:'El sistema Kanban asegura que el nuevo trabajo se inicia únicamente cuando el Kanban lo activa (señal de tipo pull), controlando así el inicio del trabajo.'}
 ];
 
+/* ============== DATA: SIMULACRO 1 — Fácil (20 preguntas originales, repaso de definiciones) ============== */
+var SIM1 = [
+{id:1, m:'in', q:'¿Qué significa la palabra japonesa "Muda"?',
+ o:['Sobrecarga','Variabilidad','Desperdicio','Estandarización'],
+ c:2, e:'Muda es el término japonés para desperdicio: cualquier actividad que no añade valor desde la perspectiva del cliente.'},
+{id:2, m:'in', q:'¿En qué año sitúa el temario el nacimiento del Toyota Production System?',
+ o:['1910','1920','1950','1955'],
+ c:3, e:'El Toyota Production System nace en 1955, apoyado en la calidad, el Just-in-Time, el Jidoka, la mejora continua y el respeto.'},
+{id:3, m:'in', q:'¿Cuál de los siguientes es uno de los 5 principios Lean?',
+ o:['Reducción de plantilla','Pull','Automatización total','Estandarización salarial'],
+ c:1, e:'Los 5 principios Lean son Customer Value, Value Stream, Flow, Pull y Perfection.'},
+{id:4, m:'in', q:'Según el acrónimo DOWNTIME, ¿qué representa la "W"?',
+ o:['Waiting (esperas)','Workforce (plantilla)','Warehouse (almacén)','Workflow (flujo de trabajo)'],
+ c:0, e:'La W de DOWNTIME es "Waiting", esperas.'},
+{id:5, m:'in', q:'¿Cuál de las siguientes es un ejemplo típico de trabajo de Valor Añadido (VA)?',
+ o:['Gestionar un inventario de incidentes acumulado','Programar el software que el cliente pidió','Esperar entre pasos de un proceso','Implementar un cambio no autorizado'],
+ c:1, e:'Programar software que aporta la funcionalidad pedida por el cliente es trabajo de valor añadido; las otras opciones son ejemplos de desperdicio.'},
+{id:6, m:'cu', q:'Según el modelo Kano, ¿qué tipo de característica genera insatisfacción si falta pero no entusiasmo si está presente?',
+ o:['Delighter','Must Be','Performance','CTQ'],
+ c:1, e:'Las características Must Be deben estar presentes; su ausencia insatisface, pero su presencia no genera entusiasmo.'},
+{id:7, m:'cu', q:'¿Qué significan las siglas CTQ?',
+ o:['Customer Total Quality','Critical to Quality','Customer Type Question','Continuous Total Quality'],
+ c:1, e:'CTQ significa Critical to Quality: traduce el valor del cliente en medidas de desempeño internas.'},
+{id:8, m:'pr', q:'¿Qué significan las siglas SIPOC?',
+ o:['Suppliers, Input, Process, Output, Customer','System, Input, Process, Objective, Cost','Suppliers, Information, Process, Outcome, Customer','Standard, Input, Process, Output, Control'],
+ c:0, e:'SIPOC significa Suppliers, Input, Process, Output, Customer: una vista de alto nivel de un proceso.'},
+{id:9, m:'pr', q:'¿Cuál de los siguientes términos NO forma parte de las 5S?',
+ o:['Seiri','Seiton','Senpai','Seiketsu'],
+ c:2, e:'Las 5S son Seiri, Seiton, Seiso, Seiketsu y Shitsuke; "Senpai" no es una de ellas.'},
+{id:10, m:'pe', q:'¿Qué significan las siglas SMART aplicadas a un KPI?',
+ o:['Specific, Measurable, Achievable, Relevant, Time-bound','Simple, Measurable, Agile, Realistic, Timed','Specific, Manageable, Actionable, Realistic, Trackable','Strategic, Measurable, Achievable, Repeatable, Tested'],
+ c:0, e:'Un KPI debe ser SMART: eSpecífico, Medible, Alcanzable, Relevante y Acotado en el Tiempo.'},
+{id:11, m:'pe', q:'¿Qué fórmula corresponde al PCE (Process Cycle Efficiency)?',
+ o:['Tiempo total / Número de tareas','Tiempo de Valor Añadido / Lead Time Total','Lead Time / Cycle Time','Coste total / Tiempo total'],
+ c:1, e:'El PCE mide qué porcentaje del tiempo se dedica a valor añadido: Tiempo de Valor Añadido / Lead Time Total.'},
+{id:12, m:'or', q:'¿Qué tablero recoge los objetivos de la semana y los KPI del equipo?',
+ o:['Day board','Week board','Improvement board','Kanban board'],
+ c:1, e:'El week board (tablero semanal) recoge los objetivos de la semana, los KPI del equipo, el barómetro del equipo y las lecciones aprendidas.'},
+{id:13, m:'or', q:'¿Cuáles son los tres elementos esenciales de un diálogo de desempeño?',
+ o:['Objetivo, Salario, Feedback','Objetivo, Apoyo, Feedback','Apoyo, Sanción, Feedback','Objetivo, Apoyo, Ascenso'],
+ c:1, e:'Un diálogo de desempeño se compone de Objetivo, Apoyo y Feedback.'},
+{id:14, m:'or', q:'En el modelo Lean de organización orientada al cliente, ¿qué recorre un mismo pedido de principio a fin?',
+ o:['Una única función especializada','Un equipo multifuncional (task force o squad)','Solo el departamento de TI','Únicamente el gestor del proyecto'],
+ c:1, e:'En una organización orientada al cliente, equipos multifuncionales recorren todo el flujo para un mismo pedido, de principio a fin.'},
+{id:15, m:'ba', q:'Según el temario, ¿qué es la actitud en contraposición al comportamiento?',
+ o:['Algo externo y observable','Algo interno: "cómo abordo la situación"','Un sinónimo exacto de comportamiento','Algo que no influye en el comportamiento'],
+ c:1, e:'La actitud es interna ("cómo abordo la situación"); el comportamiento es externo y observable ("cómo reacciono").'},
+{id:16, m:'ba', q:'¿Qué frase resume el mensaje de liderazgo de Chairman Cho de Toyota?',
+ o:['"Planifica, ejecuta, controla"','"Ir a ver, preguntar por qué, mostrar respeto"','"Reduce costes siempre"','"El cliente siempre tiene razón"'],
+ c:1, e:'El mensaje clave de Chairman Cho es "Go see, ask why, show respect": ir a ver, preguntar por qué, mostrar respeto.'},
+{id:17, m:'ba', q:'Según Daniel H. Pink, ¿qué elemento de la motivación se refiere a sentir la propiedad del propio trabajo?',
+ o:['Maestría','Propósito','Autonomía','Autoridad'],
+ c:2, e:'La autonomía es sentir la propiedad del trabajo: controlar la tarea, el tiempo, la técnica y el equipo.'},
+{id:18, m:'ps', q:'¿Qué significan las siglas DMAIC?',
+ o:['Define, Measure, Analyze, Improve, Control','Design, Manage, Assess, Implement, Check','Define, Manage, Analyze, Install, Confirm','Develop, Measure, Act, Implement, Close'],
+ c:0, e:'DMAIC significa Define, Measure, Analyze, Improve, Control: el ciclo de mejora continua.'},
+{id:19, m:'ps', q:'¿Cuántas personas suele tener el grupo de un evento Kaizen?',
+ o:['1-2','3-7','10-15','Más de 20'],
+ c:1, e:'Un evento Kaizen se apoya en un grupo multifuncional de entre 3 y 7 personas.'},
+{id:20, m:'ps', q:'¿Qué herramienta ordena las causas de un problema de mayor a menor contribución?',
+ o:['Diagrama de Ishikawa','Diagrama de Pareto','SIPOC','Método A3'],
+ c:1, e:'El diagrama de Pareto ordena las causas de un problema o condición de mayor a menor contribución (regla 80/20).'}
+];
+
+/* ============== DATA: SIMULACRO 2 — Medio (20 preguntas originales, aplicación de conceptos) ============== */
+var SIM2 = [
+{id:1, m:'in', q:'Una empresa reduce su ciclo de desarrollo apoyándose en el Just-in-Time y evitando picos y valles de producción. ¿Qué principio Lean está aplicando principalmente?',
+ o:['Value Stream','Flow','Perfection','Customer Value'],
+ c:1, e:'El Flow busca crear un flujo continuo apoyado en el Just-in-Time, evitando los picos y valles de producción.'},
+{id:2, m:'in', q:'Un equipo de soporte de TI dedica gran parte de su semana a "apagar fuegos" con incidencias no planificadas. ¿Qué término describe mejor esta situación?',
+ o:['Kaizen','Firefighting','Heijunka','Standard Working'],
+ c:1, e:'El firefighting es el trabajo no planificado que llega a superar al planificado, un síntoma típico de la desconexión entre TI y negocio.'},
+{id:3, m:'in', q:'Un departamento de TI acumula horas extra, sufre interrupciones y pierde espíritu de equipo tras entregar un producto con errores. ¿A qué tipo de coste de la mala calidad corresponde esto?',
+ o:['Coste externo a la organización','Coste interno a la organización','Coste de oportunidad','Coste regulatorio'],
+ c:1, e:'Retrabajo, interrupciones, horas extra y pérdida de espíritu de equipo son costes de la mala calidad dentro de la organización.'},
+{id:4, m:'in', q:'Six Sigma, Lean Manufacturing y Lean Services comparten un objetivo común pero difieren en su "sujeto" de estudio. ¿Cuál es el sujeto del Lean Services?',
+ o:['El producto','La máquina','Las personas','El proveedor'],
+ c:2, e:'El Lean Services tiene como sujeto a las personas, frente al producto en Six Sigma y la máquina en Lean Manufacturing.'},
+{id:5, m:'in', q:'Un equipo de TI dedica tiempo a formar a un nuevo empleado en el sistema de facturación antes de que pueda atender peticiones. Según la clasificación de actividades, ¿qué tipo de trabajo es este?',
+ o:['Valor añadido','Necesario sin valor añadido (NNVA)','Muda','Kaikaku'],
+ c:1, e:'Formar a alguien no añade valor directo al cliente, pero es necesario para que después pueda realizar trabajo de valor: es NNVA.'},
+{id:6, m:'cu', q:'Un banco entrevista a varios clientes en grupos focales para entender qué esperan de su app móvil. ¿Qué técnica de investigación de la Voz del Cliente está usando?',
+ o:['Segmentación','Observación','Entrevistas','Encuestas'],
+ c:2, e:'Los grupos focales son un formato de entrevista, una de las técnicas para investigar la Voz del Cliente.'},
+{id:7, m:'cu', q:'Una aerolínea ofrece wifi gratuito a bordo sin que ningún cliente lo hubiera pedido explícitamente, y los pasajeros quedan encantados. Según el modelo Kano, ¿qué tipo de característica es esta?',
+ o:['Must Be','Performance','Delighter','NNVA'],
+ c:2, e:'Un Delighter es un extra inesperado que sorprende positivamente, aunque su ausencia no hubiera generado insatisfacción.'},
+{id:8, m:'pr', q:'Un equipo mide que, en un proceso de atención de peticiones, el reloj empieza cuando el cliente envía la solicitud y termina cuando recibe la respuesta. ¿A qué concepto corresponde esta medición?',
+ o:['Cycle time','Lead time','Takt rate','Changeover time'],
+ c:1, e:'El lead time es el que percibe el cliente: desde que se hace la petición hasta la entrega.'},
+{id:9, m:'pr', q:'Un equipo de desarrollo empieza a producir código basándose en una previsión de demanda futura, acumulando funcionalidades que ningún cliente ha pedido todavía. ¿Qué modelo de producción está aplicando?',
+ o:['Pull','Push','Single piece flow','Kanban'],
+ c:1, e:'Push se basa en una previsión (forecast) y genera stock por adelantado, lo que puede crear cuellos de botella.'},
+{id:10, m:'pe', q:'Un equipo mide que solo el 20% de su tiempo disponible se dedica a actividades de valor añadido. Según el temario, ¿ese dato es...?',
+ o:['Un valor inusualmente bajo que indica un problema grave','Un valor típico, dentro del rango habitual del 15–30%','Un valor imposible de alcanzar en la práctica','Un valor excelente, muy por encima de la media'],
+ c:1, e:'El temario indica que, a menudo, no más del 15–30% del tiempo disponible de un equipo se dedica a actividades de valor añadido.'},
+{id:11, m:'pe', q:'Un responsable de TI decide medir el desempeño de su equipo una sola vez al año, en la evaluación anual. Según los requisitos de un buen sistema de KPI, ¿qué está incumpliendo?',
+ o:['Foco en el cliente','Alineación con la estrategia','Medición continua','Equilibrio en toda la organización'],
+ c:2, e:'Un buen sistema de KPI exige medición continua, gestionando la tendencia, no una revisión puntual una vez al año.'},
+{id:12, m:'or', q:'Un gestor comenta: "Yo tengo las respuestas, mi equipo se limita a ejecutar lo que decido". Según el cambio de paradigma del temario, ¿qué actitud sería más Lean?',
+ o:['Mantener la misma actitud, porque el gestor debe decidir siempre','El gestor debería hacer las preguntas correctas y dejar que el equipo aporte las respuestas','El equipo debería tomar todas las decisiones sin el gestor','El gestor debería delegar por completo su rol de liderazgo'],
+ c:1, e:'En el paradigma Lean, el gestor hace las preguntas correctas y el equipo, como grupo, aporta las respuestas.'},
+{id:13, m:'or', q:'Un equipo detecta un problema durante su reunión diaria y lo registra para que se le haga seguimiento en las semanas siguientes. ¿A qué tablero pasa ese problema como entrada?',
+ o:['Al day board de otro equipo','Al improvement board','Al week board del cliente','A ningún tablero, se resuelve siempre en el momento'],
+ c:1, e:'Los problemas identificados en el day board (y en el week board) se convierten en entrada del improvement board.'},
+{id:14, m:'or', q:'Una organización decide que los mandos intermedios dejen de "mirar hacia arriba" para saber qué hacer, y centren su atención en lo que ocurre en el terreno de trabajo. ¿Qué cambio estructural describe mejor esta decisión?',
+ o:['Aumentar el número de niveles jerárquicos','Invertir la pirámide organizativa, situando a la primera línea cerca del cliente','Eliminar por completo la figura del CEO','Sustituir los tableros por informes mensuales'],
+ c:1, e:'Es la inversión de la pirámide que propone Lean: la primera línea pasa a estar arriba, cerca del cliente, y el CEO en la base dando apoyo.'},
+{id:15, m:'ba', q:'Tras cometer un error, un empleado de TI mantiene una conversación centrada en entender por qué ocurrió y cómo evitarlo, en lugar de buscar un culpable. ¿Qué principio Lean se está aplicando?',
+ o:['Es más importante saber QUIÉN cometió el error que POR QUÉ ocurrió','La gestión debe centrarse en institucionalizar el trabajo de mejora, entendiendo el porqué de los errores','Los errores deben ignorarse siempre','Los errores son inevitables y no merece la pena analizarlos'],
+ c:1, e:'Lean IT ve un papel central de la gestión en institucionalizar las actividades de mejora, entendiendo el porqué de los errores en vez de buscar culpables.'},
+{id:16, m:'ba', q:'Tras el lanzamiento de una transformación Lean IT, el entusiasmo del equipo empieza a decaer al no ver resultados inmediatos, y surgen dudas sobre si fue la decisión correcta. ¿Cómo se llama este momento según el temario?',
+ o:['Kaikaku','Valle de la Desesperación','Gemba','Andon'],
+ c:1, e:'Es el Valle de la Desesperación: el momento en que la gente se desanima al no ver cumplidas sus expectativas de éxito inmediato.'},
+{id:17, m:'ba', q:'Un ingeniero, en lugar de discutir un problema desde su despacho, se desplaza a la sala de servidores para observar de primera mano lo que ocurre antes de proponer una solución. ¿Qué práctica Lean está aplicando?',
+ o:['Kaikaku','Ir a ver (Gemba)','Poka-yoke','SIPOC'],
+ c:1, e:'"Ir a ver" (Gemba) consiste precisamente en desplazarse al terreno de trabajo para entender la situación real antes de actuar.'},
+{id:18, m:'ps', q:'Un equipo detecta una brecha clara entre el desempeño actual y el deseado, pero no tiene ni idea de cuál es la causa raíz ni cuál sería la mejor solución. ¿Se cumplen las condiciones para justificar un evento Kaizen?',
+ o:['No, porque falta al menos una condición','Sí, se cumplen las tres condiciones necesarias','Solo si el problema es urgente','Solo si lo decide la alta dirección'],
+ c:1, e:'Se cumplen las tres condiciones: existe una brecha, la causa raíz no está clara y la solución no está predeterminada.'},
+{id:19, m:'ps', q:'En la fase Measure de un DMAIC, un equipo recoge demasiados datos sin saber cuáles son relevantes. ¿Qué herramienta recomienda el temario para evitar ese error?',
+ o:['El diagrama de Pareto','El diagrama causa-efecto (Ishikawa), para saber qué medir','El método A3','El modelo Kano'],
+ c:1, e:'El temario recomienda usar el diagrama causa-efecto para decidir qué datos merece la pena medir, evitando recoger datos de más.'},
+{id:20, m:'ps', q:'Un equipo redacta un documento que resume la definición del problema, el alcance, las causas raíz, las contramedidas y los resultados obtenidos. ¿Qué herramienta Kaizen está usando?',
+ o:['SIPOC','Método A3','Value Stream Map','Ficha de KPI'],
+ c:1, e:'El A3 resume precisamente la definición del problema, el alcance, las causas raíz, las contramedidas y los resultados.'}
+];
+
+/* ============== DATA: SIMULACRO 3 — Difícil (20 preguntas originales, casos y matices) ============== */
+var SIM3 = [
+{id:1, m:'in', q:'Un equipo Lean identifica que, aunque cada tarea se hace correctamente, la carga de trabajo varía mucho de una semana a otra porque la demanda del cliente es muy irregular. ¿Qué barrera al flujo de valor describe mejor esta situación?',
+ o:['Muri','Mura','Muda','Jidoka'],
+ c:1, e:'Mura es la variabilidad o inconsistencia en el volumen o complejidad de la demanda; se distingue de Muri, que es la sobrecarga por incapacidad de escalar recursos.'},
+{id:2, m:'in', q:'Una organización obliga a su equipo de TI a mantener siempre la misma plantilla, sin poder ampliarla ni reducirla, aunque la demanda de peticiones fluctúe de forma constante. ¿Qué concepto describe mejor la causa raíz de esta situación?',
+ o:['Mura','Muri','Kaikaku','Standard Working'],
+ c:1, e:'Muri es la incapacidad de escalar la capacidad del equipo arriba o abajo según la demanda, en gran parte derivada de las propias políticas de la organización — como una plantilla fija por norma.'},
+{id:3, m:'in', q:'Un director de TI afirma: "Nuestro objetivo es alinearnos con las prioridades del negocio". Desde la perspectiva de Lean IT descrita en el temario, ¿qué matiz debería cuestionar esa afirmación?',
+ o:['Que TI debería centrarse solo en la tecnología','Que la pregunta de fondo es si TI debe alinearse o, directamente, habilitar el crecimiento del negocio','Que el negocio no debería marcar prioridades a TI','Que la alineación con el negocio no es posible en TI'],
+ c:1, e:'El temario plantea justo esa pregunta de fondo: si el objetivo de TI debe ser "alinearse" o ir más allá y habilitar el crecimiento del negocio.'},
+{id:4, m:'in', q:'Un equipo de desarrollo realiza pruebas de aceptación antes de entregar una funcionalidad al cliente. El cliente no ve directamente ese trabajo, pero sin él no podría confiar en la funcionalidad entregada. ¿Cómo se clasifica esta actividad?',
+ o:['Valor añadido','Necesario sin valor añadido','Muda','Value Stream'],
+ c:1, e:'El testing es un ejemplo clásico de NNVA: no aporta valor directo visible al cliente, pero es necesario para que el trabajo de valor pueda entregarse con garantías.'},
+{id:5, m:'in', q:'¿Cuál de las siguientes NO es una de las cinco dimensiones de Lean IT descritas en el temario?',
+ o:['Proceso','Rendimiento','Tecnología','Organización'],
+ c:2, e:'Las 5 dimensiones son Comportamiento/Actitud (centro), Cliente, Proceso, Organización y Rendimiento; "Tecnología" no es una de ellas como tal.'},
+{id:6, m:'cu', q:'Un equipo de TI define como objetivo estratégico "soporte excelente" a partir de la Voz del Cliente, lo traduce en el CTQ "resolución rápida de incidencias" y de ahí en el atributo medible "tiempo medio de resolución menor a 2 horas". ¿Qué herramienta se está aplicando?',
+ o:['SIPOC','Árbol CTQ','Modelo Kano','Value Stream Map'],
+ c:1, e:'Es exactamente el proceso del árbol CTQ: de la Voz del Cliente a los CTQ, y de ahí a los atributos medibles.'},
+{id:7, m:'cu', q:'Una empresa detecta que debe cumplir un nuevo estándar de protección de datos aunque ningún cliente lo haya pedido directamente. ¿De qué fuente de mejora procede esta iniciativa?',
+ o:['Voice of the Customer','Voice of the Process','Voice of the Regulator','Voice of Business'],
+ c:2, e:'La Voice of the Regulator identifica mejoras basadas en requisitos legales o normativos.'},
+{id:8, m:'pr', q:'En un Value Stream Map, un equipo detecta que el lead time total de un proceso de cambios es de 20 días, pero la suma de los cycle time de todos los pasos es solo de un día y medio. ¿Qué conclusión es más coherente con los principios Lean?',
+ o:['El proceso es eficiente porque el cycle time es corto','La mayor parte del tiempo es desperdicio en forma de esperas entre pasos, y ahí está la oportunidad de mejora','El takt rate del proceso es demasiado alto','El proceso necesita más inventario para compensar la diferencia'],
+ c:1, e:'La gran diferencia entre lead time y cycle time revela que la mayor parte del tiempo se pierde en esperas entre pasos — el tipo de desperdicio que el VSM ayuda a identificar y reducir.'},
+{id:9, m:'pr', q:'Un equipo logra que cada paso de su proceso pueda procesar la misma cantidad de unidades de trabajo por unidad de tiempo, eliminando cuellos de botella. ¿Qué concepto Lean describe mejor este logro?',
+ o:['Heijunka','Jidoka','SIPOC','Poka-yoke'],
+ c:0, e:'El Heijunka busca precisamente ese equilibrio: evitar cuellos de botella y lograr que cada paso procese la misma cantidad de trabajo por unidad de tiempo.'},
+{id:10, m:'pe', q:'Un KPI de tiempo de resolución de incidencias es definido y controlado exclusivamente por el gestor del equipo, sin que el propio equipo tenga capacidad de influir en él. ¿Qué principio de un buen KPI se está vulnerando?',
+ o:['Debe ser SMART','Debe ser controlable por el equipo, no por el gestor','Debe estar documentado en una ficha','Debe tener una unidad de medida'],
+ c:1, e:'Un KPI debe ser controlable por el propio equipo, no impuesto y gestionado solo por el gestor.'},
+{id:11, m:'pe', q:'Un equipo de TI detecta que, aunque todos sus miembros dominan una única tecnología en profundidad, no pueden cubrirse entre sí cuando alguien falta, generando cuellos de botella recurrentes. ¿Qué análisis y qué acción recomienda el temario?',
+ o:['Un análisis de KPI, para fijar más objetivos individuales','Un análisis de Habilidades y Conocimientos, para desarrollar perfiles multidisciplinares','Un Value Stream Map, para eliminar pasos del proceso','Un modelo Kano, para priorizar funcionalidades'],
+ c:1, e:'Es exactamente el problema que resuelve el análisis de Skills & Knowledge: equilibrar demanda y oferta de habilidades desarrollando personal multidisciplinar.'},
+{id:12, m:'or', q:'Un equipo tiene un day start diario, un week start semanal, una reunión de mandos intermedios también semanal y una reunión de dirección ejecutiva mensual. Surge un problema grave en el day start de un lunes que necesita apoyo de la alta dirección. Según la cascada de comunicación, ¿cómo debería fluir esa petición con mayor rapidez?',
+ o:['Esperando a la reunión mensual de dirección ejecutiva','Pidiendo apoyo hacia arriba en cada nivel sucesivo, sin esperar al ciclo mensual completo','Ignorando el problema hasta la semana siguiente','Comunicándolo únicamente por correo electrónico, fuera de los tableros'],
+ c:1, e:'La cascada de tableros permite pedir apoyo hacia arriba en cada nivel de forma ágil, sin esperar al ciclo de reporting más lento.'},
+{id:13, m:'or', q:'Durante una sesión de coaching, un gestor discute con un empleado las razones de un objetivo incumplido y le impone directamente la solución que debe aplicar, sin preguntarle su opinión. ¿Qué principio del diálogo de desempeño está vulnerando?',
+ o:['Debe discutirse el logro de objetivos ya acordados, no que el gestor imponga la solución','El diálogo de desempeño no debe tratar objetivos incumplidos','El feedback debe darse siempre por escrito','El diálogo de desempeño solo puede tratar temas positivos'],
+ c:0, e:'El diálogo de desempeño trata de discutir el logro de objetivos y ofrecer apoyo, no de que el gestor imponga la solución, porque eso reduce la autonomía del empleado.'},
+{id:14, m:'or', q:'Una organización de TI muy jerárquica implanta tableros visuales, pero los gestores siguen pasando menos del 10% de su tiempo con sus equipos. ¿Qué elemento de la gestión visual seguiría sin cumplirse?',
+ o:['Compartir información en un tablero','Conectar a la dirección con la operación diaria del equipo','Dar feedback una vez al año','Sustituir las reuniones por correos electrónicos'],
+ c:1, e:'Uno de los objetivos centrales de la gestión visual es conectar a la dirección con la operación diaria del equipo; si los gestores apenas están presentes, ese objetivo no se cumple aunque existan los tableros.'},
+{id:15, m:'ba', q:'En una reunión, alguien critica con dureza el trabajo de un compañero, atribuyéndole intenciones que no ha verificado ("seguro que no le importó hacerlo bien"). Según la lista de comportamientos del temario, ¿qué combinación está mostrando?',
+ o:['Comportamientos Lean: objetividad y respeto','Comportamientos no Lean: interpretaciones y crítica destructiva','Comportamientos Lean: escucha y compasión','Ninguno de los anteriores, es un comportamiento neutro'],
+ c:1, e:'Atribuir intenciones no verificadas es una "interpretación", y la crítica dura sin base es "crítica destructiva" — ambos comportamientos no Lean.'},
+{id:16, m:'ba', q:'Tras una fase inicial de entusiasmo y una posterior fase de desánimo por resultados que tardaron en llegar, los indicadores de una transformación Lean IT empiezan por fin a mejorar de forma sostenida. ¿Qué fase describe mejor esta situación?',
+ o:['La organización sigue en el Valle de la Desesperación','La organización ha superado el Valle de la Desesperación gracias a la perseverancia','La organización debería iniciar un Kaikaku inmediatamente','La organización debería abandonar la transformación Lean'],
+ c:1, e:'El temario describe que, con perseverancia, la realidad vuelve a acercarse a las expectativas tras el Valle de la Desesperación, y el proyecto madura.'},
+{id:17, m:'ba', q:'Un equipo aplica Lean IT centrándose exclusivamente en recortar costes de infraestructura, sin prestar atención al valor entregado al cliente ni a la relación a largo plazo con los proveedores. ¿Qué está haciendo mal, según los rasgos de la mentalidad Lean?',
+ o:['Nada, recortar costes es siempre el objetivo principal de Lean','Contradice varios rasgos: el foco debe estar en entregar valor, no solo en recortar costes, y hay que cultivar relaciones a largo plazo en las que todas las partes ganen','Está aplicando correctamente el principio de Perfection','Está aplicando correctamente el principio de Pull'],
+ c:1, e:'La mentalidad Lean pone el foco en entregar valor, no solo en recortar costes, y en cultivar relaciones a largo plazo donde todas las partes ganen.'},
+{id:18, m:'ps', q:'Durante la fase Improve de un DMAIC, el líder del equipo impone su propia solución preferida sin contrastarla con el resto, y meses después el cambio genera fuerte resistencia entre los empleados afectados. ¿Qué dos errores comunes de esta fase se han cometido?',
+ o:['Terminar demasiado pronto y no estandarizar la solución','Imponer una solución preferida en vez de usar una técnica de decisión estructurada, y subestimar el impacto del cambio en las personas','Recoger demasiados datos y no verificar los supuestos','No definir el alcance ni el SIPOC'],
+ c:1, e:'Ambos son errores típicos de la fase Improve: imponer una solución sin decisión estructurada del equipo, y no comunicar bien el cambio a los afectados.'},
+{id:19, m:'ps', q:'Un equipo cierra un Kaizen dando por bueno el resultado nada más implementar el cambio, sin definir cómo monitorizarlo ni considerar si la mejora podría replicarse en otros procesos similares. ¿En qué fase de DMAIC se encuentran estos errores?',
+ o:['En Define: alcance demasiado amplio y falta de SIPOC','En Control: terminar demasiado pronto y desaprovechar los beneficios por no replicar/estandarizar','En Analyze: no verificar supuestos y sacar conclusiones precipitadas','En Measure: sistema de medición no válido'],
+ c:1, e:'Son los dos errores comunes de la fase Control: terminar demasiado pronto sin definir monitorización, y no aprovechar la oportunidad de replicar y estandarizar la mejora.'},
+{id:20, m:'ps', q:'Un equipo constata que, tras aplicar una contramedida, el problema original ha dejado de repetirse, pero no han dejado ningún procedimiento estandarizado (SOP) ni han compartido las lecciones aprendidas con otros equipos. ¿Qué fase del ciclo DMAIC queda incompleta?',
+ o:['La fase Define, porque falta el charter Kaizen','La fase Control, porque falta el charter completo con lecciones aprendidas y la sostenibilidad del cambio','La fase Analyze, porque falta la identificación de causas raíz','La fase Improve, porque falta el piloto de la solución'],
+ c:1, e:'Cerrar el ciclo con procedimientos para mantener las ganancias y compartir lecciones aprendidas es precisamente lo que persigue la fase Control.'}
+];
+
+/* ============== DATA: EXAMS (simulacro configs) ============== */
+var EXAMS = [
+  {id:'official', code:'40', label:'Simulacro oficial', sub:'40 preguntas · examen de muestra APMG', questions: QUESTIONS},
+  {id:'sim1', code:'20', label:'Simulacro 1 · Fácil', sub:'20 preguntas originales · repaso de definiciones', questions: SIM1},
+  {id:'sim2', code:'20', label:'Simulacro 2 · Medio', sub:'20 preguntas originales · aplicación de conceptos', questions: SIM2},
+  {id:'sim3', code:'20', label:'Simulacro 3 · Difícil', sub:'20 preguntas originales · casos y matices', questions: SIM3}
+];
+function findExam(id){ return EXAMS.filter(function(e){ return e.id === id; })[0]; }
+
 /* ============== STATE ============== */
-var state = { view:'in', sub:'theory', answers:{}, examAnswers:{}, examDone:false };
+var state = { view:'in', sub:'theory', answers:{}, exams:{} };
+EXAMS.forEach(function(ex){ state.exams[ex.id] = { answers:{}, done:false }; });
 var byModule = {};
 MODULES.forEach(function(m){ byModule[m.id] = QUESTIONS.filter(function(q){ return q.m === m.id; }); });
 
@@ -685,17 +887,23 @@ function renderRail(){
       '<span class="dot ' + dot + '"></span>' +
     '</button>';
   });
-  html += '<div class="rail-exam">' +
-    '<button class="rail-item' + (state.view === 'exam' ? ' active' : '') + '" data-view="exam">' +
-      '<span class="code">40</span><span class="label">Simulacro completo</span>' +
-      '<span class="dot ' + (state.examDone ? (examPass() ? 'done' : 'done wrong') : (Object.keys(state.examAnswers).length ? 'some' : '')) + '"></span>' +
-    '</button>' +
-  '</div>';
+  html += '<div class="rail-divider"></div><div class="rail-heading">Simulacros</div>';
+  EXAMS.forEach(function(ex){
+    var st = state.exams[ex.id];
+    var answeredCount = Object.keys(st.answers).length;
+    var dot = st.done ? (examPass(ex) ? 'done' : 'done wrong') : (answeredCount ? 'some' : '');
+    html += '<button class="rail-item' + (state.view === ex.id ? ' active' : '') + '" data-view="' + ex.id + '">' +
+      '<span class="code">' + ex.code + '</span>' +
+      '<span class="label">' + ex.label + '</span>' +
+      '<span class="dot ' + dot + '"></span>' +
+    '</button>';
+  });
   rail.innerHTML = html;
+  var examIds = EXAMS.map(function(ex){ return ex.id; });
   Array.prototype.forEach.call(rail.querySelectorAll('.rail-item'), function(btn){
     btn.addEventListener('click', function(){
       state.view = btn.getAttribute('data-view');
-      if(state.view !== 'exam') state.sub = 'theory';
+      if(examIds.indexOf(state.view) === -1) state.sub = 'theory';
       renderAll();
     });
   });
@@ -787,13 +995,13 @@ function renderQuestionCard(q, num, picked){
   return html;
 }
 
-function wireQuestionCards(container, qs, bucket){
+function wireQuestionCards(container, qs, bucket, examId){
   Array.prototype.forEach.call(container.querySelectorAll('.qcard'), function(card){
     var qid = parseInt(card.getAttribute('data-qid'), 10);
     Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(btn){
       btn.addEventListener('click', function(){
         var i = parseInt(btn.getAttribute('data-i'), 10);
-        state[bucket][qid] = i;
+        if(examId){ state.exams[examId].answers[qid] = i; } else { state[bucket][qid] = i; }
         renderAll();
       });
     });
@@ -803,39 +1011,42 @@ function wireQuestionCards(container, qs, bucket){
 /* ============== RENDER: EXAM (simulacro) ============== */
 var SYLLABUS_NAMES = {in:'Introducción a Lean', cu:'El Cliente', pr:'El Proceso', pe:'Rendimiento', or:'Organización', ba:'Comportamiento y Actitud', ps:'Kaizen / Resolución de problemas'};
 
-function examScore(){
-  var correct = 0;
-  QUESTIONS.forEach(function(q){ if(state.examAnswers[q.id] === q.c) correct++; });
+function examScore(ex){
+  var st = state.exams[ex.id], correct = 0;
+  ex.questions.forEach(function(q){ if(st.answers[q.id] === q.c) correct++; });
   return correct;
 }
-function examPass(){ return examScore() >= 26; }
+function examPassMark(ex){ return Math.round(ex.questions.length * 0.65); }
+function examPass(ex){ return examScore(ex) >= examPassMark(ex); }
 
-function renderExamPanel(){
+function renderExamPanel(ex){
   var panel = document.getElementById('panel');
-  var answered = Object.keys(state.examAnswers).length;
-  var html = '<div class="panel-head"><h2>Simulacro completo — 40 preguntas</h2>' +
-    '<span class="sub">Estilo examen real · aprobado ≥ 26/40 (65%)</span></div>' +
+  var st = state.exams[ex.id];
+  var total = ex.questions.length;
+  var answered = Object.keys(st.answers).length;
+  var html = '<div class="panel-head"><h2>' + ex.label + ' — ' + total + ' preguntas</h2>' +
+    '<span class="sub">' + ex.sub + ' · aprobado ≥ ' + examPassMark(ex) + '/' + total + ' (65%)</span></div>' +
     '<div class="panel-body" id="panel-body"></div>';
   panel.innerHTML = html;
   var body = document.getElementById('panel-body');
 
-  if(state.examDone){
-    body.innerHTML = renderResults() + renderExamQuestions(true);
-    wireQuestionCards(body, QUESTIONS, 'examAnswers');
+  if(st.done){
+    body.innerHTML = renderResults(ex) + renderExamQuestions(ex);
+    wireQuestionCards(body, ex.questions, null, ex.id);
     var retry = document.getElementById('btn-retry');
     if(retry) retry.addEventListener('click', function(){
-      state.examAnswers = {}; state.examDone = false; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
+      state.exams[ex.id] = { answers:{}, done:false }; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
     });
     return;
   }
 
-  var html2 = '<div class="qcount">Progreso: ' + answered + ' / 40 respondidas — la corrección y las explicaciones aparecerán al pulsar "Corregir simulacro".</div>';
-  QUESTIONS.forEach(function(q, idx){
-    html2 += renderExamQuestionUnanswered(q, idx + 1);
+  var html2 = '<div class="qcount">Progreso: ' + answered + ' / ' + total + ' respondidas — la corrección y las explicaciones aparecerán al pulsar "Corregir simulacro".</div>';
+  ex.questions.forEach(function(q, idx){
+    html2 += renderExamQuestionUnanswered(ex, q, idx + 1);
   });
   html2 += '<div class="examfoot">' +
-    '<span class="progresstext">' + answered + ' / 40 respondidas</span>' +
-    '<button class="btn btn-primary" id="btn-correct"' + (answered < 40 ? ' disabled' : '') + '>Corregir simulacro</button>' +
+    '<span class="progresstext">' + answered + ' / ' + total + ' respondidas</span>' +
+    '<button class="btn btn-primary" id="btn-correct"' + (answered < total ? ' disabled' : '') + '>Corregir simulacro</button>' +
   '</div>';
   body.innerHTML = html2;
 
@@ -844,19 +1055,19 @@ function renderExamPanel(){
     Array.prototype.forEach.call(card.querySelectorAll('.opt'), function(btn){
       btn.addEventListener('click', function(){
         var i = parseInt(btn.getAttribute('data-i'), 10);
-        state.examAnswers[qid] = i;
+        state.exams[ex.id].answers[qid] = i;
         renderAll();
       });
     });
   });
   var correctBtn = document.getElementById('btn-correct');
   if(correctBtn) correctBtn.addEventListener('click', function(){
-    state.examDone = true; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
+    state.exams[ex.id].done = true; renderAll(); window.scrollTo({top:0, behavior:'smooth'});
   });
 }
 
-function renderExamQuestionUnanswered(q, num){
-  var picked = state.examAnswers[q.id];
+function renderExamQuestionUnanswered(ex, q, num){
+  var picked = state.exams[ex.id].answers[q.id];
   var html = '<div class="qcard" data-qid="' + q.id + '">' +
     '<div class="qnum">Pregunta ' + num + ' · ' + q.m.toUpperCase() + '</div>' +
     '<div class="qtext">' + q.q + '</div><div class="opts">';
@@ -868,27 +1079,31 @@ function renderExamQuestionUnanswered(q, num){
   return html;
 }
 
-function renderExamQuestions(withAnswers){
+function renderExamQuestions(ex){
+  var st = state.exams[ex.id];
   var html = '<h3 style="font-family:var(--font-display);font-size:16px;margin:26px 0 12px;">Revisión pregunta por pregunta</h3>';
-  QUESTIONS.forEach(function(q, idx){
-    html += renderQuestionCard(q, idx + 1, state.examAnswers[q.id]);
+  ex.questions.forEach(function(q, idx){
+    html += renderQuestionCard(q, idx + 1, st.answers[q.id]);
   });
   return html;
 }
 
-function renderResults(){
-  var score = examScore();
-  var pass = examPass();
+function renderResults(ex){
+  var st = state.exams[ex.id];
+  var total = ex.questions.length;
+  var score = examScore(ex);
+  var passMark = examPassMark(ex);
+  var pass = examPass(ex);
   var breakdown = {};
   MODULES.forEach(function(m){ breakdown[m.id] = {correct:0, total:0}; });
-  QUESTIONS.forEach(function(q){
+  ex.questions.forEach(function(q){
     breakdown[q.m].total++;
-    if(state.examAnswers[q.id] === q.c) breakdown[q.m].correct++;
+    if(st.answers[q.id] === q.c) breakdown[q.m].correct++;
   });
   var html = '<div class="resultbar ' + (pass ? 'pass' : 'fail') + '">' +
-    '<div class="score">' + score + ' <span style="font-size:16px;color:var(--ink-soft);">/ 40</span></div>' +
+    '<div class="score">' + score + ' <span style="font-size:16px;color:var(--ink-soft);">/ ' + total + '</span></div>' +
     '<span class="pill ' + (pass ? 'pass' : 'fail') + '">' + (pass ? 'Aprobado' : 'No aprobado') + '</span>' +
-    '<span style="font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);">Umbral para aprobar: 26 / 40 (65%)</span>' +
+    '<span style="font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);">Umbral para aprobar: ' + passMark + ' / ' + total + ' (65%)</span>' +
     '<span style="flex:1;"></span>' +
     '<button class="btn btn-ghost" id="btn-retry">Repetir simulacro</button>' +
   '</div>';
@@ -901,7 +1116,7 @@ function renderResults(){
       '<td class="num">' + b.correct + '</td><td class="num">' + b.total + '</td></tr>';
   });
   html += '<tr><td></td><td style="font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);">Total</td>' +
-    '<td class="num" style="font-weight:700;">' + score + '</td><td class="num" style="font-weight:700;">40</td></tr>';
+    '<td class="num" style="font-weight:700;">' + score + '</td><td class="num" style="font-weight:700;">' + total + '</td></tr>';
   html += '</tbody></table></div>';
   return html;
 }
@@ -909,7 +1124,8 @@ function renderResults(){
 /* ============== MAIN RENDER ============== */
 function renderAll(){
   renderRail();
-  if(state.view === 'exam'){ renderExamPanel(); }
+  var ex = findExam(state.view);
+  if(ex){ renderExamPanel(ex); }
   else {
     var mod = MODULES.filter(function(m){ return m.id === state.view; })[0];
     renderModulePanel(mod);
