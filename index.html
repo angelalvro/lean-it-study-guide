@@ -848,12 +848,77 @@ var SIM3 = [
  c:1, e:'Cerrar el ciclo con procedimientos para mantener las ganancias y compartir lecciones aprendidas es precisamente lo que persigue la fase Control.'}
 ];
 
+/* ============== DATA: SIMULACRO 4 — Estilo examen real (20 preguntas originales, calibrado con feedback post-examen) ============== */
+var SIM4 = [
+{id:1, m:'in', q:'¿Cuál de las siguientes es la definición correcta de Lean IT?',
+ o:['La extensión de los principios de Lean Manufacturing y Lean Services a la gestión de productos y servicios de TI','Un conjunto de herramientas para automatizar procesos de TI','Una metodología de gestión de proyectos ágil aplicada a TI','Un estándar de calidad certificable para departamentos de TI'],
+ c:0, e:'Es la definición literal del temario: Lean IT extiende los principios de Lean Manufacturing y Lean Services al desarrollo y gestión de productos y servicios de TI.'},
+{id:2, m:'in', q:'¿En qué se apoya principalmente el Toyota Production System (TPS)?',
+ o:['Calidad, Just-in-Time, Jidoka, mejora continua y respeto','Reducción de plantilla y automatización total','Externalización de la producción y reducción de inventario únicamente','Estandarización salarial y control de horarios'],
+ c:0, e:'El TPS, nacido en 1955, se apoya en la calidad, el Just-in-Time, el Jidoka, la mejora continua y el respeto por las personas.'},
+{id:3, m:'in', q:'¿Cuál es el orden correcto de los 5 principios Lean, empezando por el centro?',
+ o:['Customer Value → Value Stream → Flow → Pull → Perfection','Value Stream → Customer Value → Pull → Flow → Perfection','Flow → Pull → Customer Value → Value Stream → Perfection','Perfection → Customer Value → Flow → Value Stream → Pull'],
+ c:0, e:'El valor del cliente (Customer Value) está en el centro; a su alrededor giran Value Stream, Flow, Pull y Perfection.'},
+{id:4, m:'in', q:'¿Cuál de las siguientes actividades es de Valor Añadido (VA)?',
+ o:['Programar la funcionalidad que el cliente ha pedido','Gestionar un backlog de incidentes acumulado','Esperar entre dos pasos de un proceso','Retrabajo por un defecto de software'],
+ c:0, e:'Programar una funcionalidad pedida por el cliente es trabajo de valor añadido; las otras tres son ejemplos de desperdicio (Muda).'},
+{id:5, m:'in', q:'¿Cuál de las siguientes actividades es Necesaria pero Sin Valor Añadido (NNVA)?',
+ o:['Las pruebas de testing antes de entregar al cliente','La sobreproducción de funcionalidades no pedidas','El retrabajo por errores de software','La espera entre programación y testing'],
+ c:0, e:'El testing no añade valor directo visible al cliente, pero es necesario para poder entregar con garantías: es NNVA. Las otras tres son Muda.'},
+{id:6, m:'in', q:'¿Cuál de los siguientes NO es uno de los 8 desperdicios (DOWNTIME)?',
+ o:['Overproduction (sobreproducción)','Standardization (estandarización)','Waiting (esperas)','Motion (movimiento)'],
+ c:1, e:'DOWNTIME son Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion y Extra-processing. "Standardization" no forma parte del acrónimo.'},
+{id:7, m:'ps', q:'¿Cuál es la definición correcta de Kaizen?',
+ o:['Mejora continua en pasos pequeños, sostenida en el tiempo','Cambio radical y revolucionario de un proceso','Un sistema de control de inventario','Un tipo de certificación de calidad'],
+ c:0, e:'Kaizen es la evolución incremental: mejora continua en pasos pequeños. El cambio radical es el Kaikaku.'},
+{id:8, m:'ps', q:'¿Cuál de los siguientes es un beneficio directo de practicar Kaizen, según el temario?',
+ o:['Entregar valor más rápido y aumentar la rentabilidad','Eliminar por completo la necesidad de medir KPI','Sustituir la fase de Measure del DMAIC','Evitar la necesidad de formar a los empleados'],
+ c:0, e:'Practicar Kaizen persigue, entre otros fines, entregar mejor calidad de servicio, entregar valor más rápido y aumentar la rentabilidad.'},
+{id:9, m:'ps', q:'¿Qué resume principalmente un documento A3?',
+ o:['La definición del problema, el alcance, las causas raíz, las contramedidas y los resultados','Únicamente el presupuesto asignado al proyecto Kaizen','La lista de asistentes al evento Kaizen','El organigrama del equipo de TI'],
+ c:0, e:'El A3 resume la definición del problema, el alcance, las causas raíz, las contramedidas y los resultados, forzando a centrarse en la causa raíz.'},
+{id:10, m:'ps', q:'¿En qué fase de DMAIC se utiliza principalmente el diagrama de Ishikawa?',
+ o:['Analyze','Define','Measure','Control'],
+ c:0, e:'El diagrama de Ishikawa (espina de pescado) es una herramienta de análisis de causa raíz propia de la fase Analyze.'},
+{id:11, m:'ps', q:'¿En qué fase de DMAIC se elabora principalmente el Value Stream Map?',
+ o:['Measure','Define','Improve','Control'],
+ c:0, e:'El VSM es el resultado principal de la fase Measure, donde se documenta el estado actual del proceso.'},
+{id:12, m:'ba', q:'¿Cuál de los siguientes es un comportamiento Lean?',
+ o:['Compasión y diálogo constructivo','Adulación excesiva hacia el gestor','Defender la propia postura sin escuchar','Buscar quién cometió el error'],
+ c:0, e:'La compasión y el diálogo constructivo están en la lista de comportamientos Lean; la adulación excesiva y la falta de escucha son comportamientos no Lean, aunque a primera vista puedan parecer positivos.'},
+{id:13, m:'ba', q:'¿Cuál de los siguientes NO es un comportamiento Lean?',
+ o:['Objetividad y escucha','Confianza y respeto','Interpretar las intenciones de los demás sin verificarlas','Compartir conocimiento con transparencia'],
+ c:2, e:'Interpretar intenciones sin verificarlas es, literalmente, una "interpretación" — uno de los comportamientos no Lean del temario, aunque a veces se confunda con ser perceptivo.'},
+{id:14, m:'ba', q:'Ante un error de un empleado, ¿qué actitud es la más Lean?',
+ o:['Entender por qué ocurrió y usarlo para mejorar el proceso','Identificar rápidamente quién es el responsable','Aceptar que los errores son inevitables y no analizarlos','Sancionar de inmediato para que no se repita'],
+ c:0, e:'Lean IT ve un papel central de la gestión en institucionalizar la mejora entendiendo el porqué de los errores, no en buscar culpables ni sancionar.'},
+{id:15, m:'pr', q:'Dentro de las 5S, ¿qué significa "Sort"?',
+ o:['Eliminar lo innecesario y quedarse solo con lo esencial','Limpiar el puesto de trabajo al final del turno','Estandarizar las prácticas de trabajo','Mantener y revisar los estándares'],
+ c:0, e:'"Sort" (Seiri en japonés) consiste en eliminar herramientas, piezas e instrucciones innecesarias, quedándose solo con lo esencial.'},
+{id:16, m:'pr', q:'¿Cuál es el orden correcto de las 5S?',
+ o:['Sort → Set in Order → Shine → Standardize → Sustain','Shine → Sort → Sustain → Standardize → Set in Order','Standardize → Sort → Shine → Sustain → Set in Order','Sustain → Shine → Sort → Set in Order → Standardize'],
+ c:0, e:'El orden de las 5S es Sort (clasificar), Set in Order (ordenar), Shine (limpiar), Standardize (estandarizar) y Sustain (mantener).'},
+{id:17, m:'pr', q:'¿Qué es un SOP (Standard Operating Procedure)?',
+ o:['El documento que describe la mejor forma conocida de ejecutar un proceso en un momento dado','Un informe financiero mensual del departamento de TI','Un tipo de contrato con proveedores externos','Un indicador de satisfacción del cliente'],
+ c:0, e:'El SOP es el documento que describe la mejor forma conocida de ejecutar un paso o proceso en un momento dado.'},
+{id:18, m:'cu', q:'¿Qué significan las siglas VOC?',
+ o:['Voice of the Customer','Value of the Company','Volume of Change','Verification of Compliance'],
+ c:0, e:'VOC significa Voice of the Customer, la Voz del Cliente.'},
+{id:19, m:'or', q:'¿Qué tablero recoge los KPI del equipo y los objetivos de la semana?',
+ o:['Week board','Day board','Improvement board','Kanban board'],
+ c:0, e:'El week board (tablero semanal) recoge los objetivos de la semana, los KPI del equipo y las lecciones aprendidas.'},
+{id:20, m:'pe', q:'¿Qué mide el PCE (Process Cycle Efficiency)?',
+ o:['El porcentaje de tiempo dedicado a actividades de valor añadido','El número total de KPI activos en un equipo','El coste total de un proyecto de TI','La satisfacción del cliente en una encuesta'],
+ c:0, e:'El PCE mide qué porcentaje del tiempo se dedica a actividades de valor añadido: Tiempo de Valor Añadido / Lead Time Total.'}
+];
+
 /* ============== DATA: EXAMS (simulacro configs) ============== */
 var EXAMS = [
   {id:'official', code:'40', label:'Simulacro oficial', sub:'40 preguntas · examen de muestra APMG', questions: QUESTIONS},
   {id:'sim1', code:'20', label:'Simulacro 1 · Fácil', sub:'20 preguntas originales · repaso de definiciones', questions: SIM1},
   {id:'sim2', code:'20', label:'Simulacro 2 · Medio', sub:'20 preguntas originales · aplicación de conceptos', questions: SIM2},
-  {id:'sim3', code:'20', label:'Simulacro 3 · Difícil', sub:'20 preguntas originales · casos y matices', questions: SIM3}
+  {id:'sim3', code:'20', label:'Simulacro 3 · Difícil', sub:'20 preguntas originales · casos y matices', questions: SIM3},
+  {id:'sim4', code:'20', label:'Simulacro 4 · Estilo real', sub:'20 preguntas originales · calibrado con feedback post-examen', questions: SIM4}
 ];
 function findExam(id){ return EXAMS.filter(function(e){ return e.id === id; })[0]; }
 
