@@ -258,6 +258,16 @@
   table.breakdown .code{ font-family:var(--font-mono); font-weight:700; color:var(--accent-ink); }
   .tablewrap{ overflow-x:auto; margin-bottom:22px; }
 
+  /* ---------- Reference tables (Resumen) ---------- */
+  table.reftable{ width:100%; border-collapse:collapse; font-size:14.5px; max-width:76ch; }
+  table.reftable th{
+    text-align:left; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-faint); border-bottom:2px solid var(--rule); padding:8px 10px;
+  }
+  table.reftable td{ border-bottom:1px solid var(--rule); padding:10px; vertical-align:top; }
+  table.reftable td.term{ font-family:var(--font-mono); font-weight:700; color:var(--accent-ink); white-space:nowrap; }
+  table.reftable tr:last-child td{ border-bottom:none; }
+
   .examfoot{
     display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
     margin-top:8px; padding-top:14px; border-top:1px dashed var(--rule);
@@ -1104,6 +1114,10 @@ function renderRail(){
       '<span class="dot ' + dot + '"></span>' +
     '</button>';
   });
+  html += '<div class="rail-divider"></div><div class="rail-heading">Resumen</div>' +
+    '<button class="rail-item' + (state.view === 'summary' ? ' active' : '') + '" data-view="summary">' +
+      '<span class="code">RS</span><span class="label">Tablas rápidas (5S, DMAIC)</span><span class="dot"></span>' +
+    '</button>';
   rail.innerHTML = html;
   var examIds = EXAMS.map(function(ex){ return ex.id; });
   Array.prototype.forEach.call(rail.querySelectorAll('.rail-item'), function(btn){
@@ -1327,9 +1341,41 @@ function renderResults(ex){
   return html;
 }
 
+/* ============== RENDER: SUMMARY (tablas rápidas) ============== */
+function renderSummaryPanel(){
+  var panel = document.getElementById('panel');
+  var html = '<div class="panel-head"><h2>Resumen — Tablas rápidas</h2>' +
+    '<span class="sub">5S y DMAIC de un vistazo, para repasar justo antes del examen</span></div>' +
+    '<div class="panel-body"><div class="theory">';
+
+  html += '<h3>Las 5S</h3>' +
+    '<p>Nombre en inglés (el que suele aparecer en el examen), término japonés de origen entre paréntesis, y qué significa en la práctica.</p>' +
+    '<table class="reftable"><thead><tr><th>Inglés</th><th>Japonés</th><th>Qué es</th></tr></thead><tbody>' +
+      '<tr><td class="term">Sort</td><td>Seiri</td><td>Clasificar: eliminar herramientas, piezas e instrucciones innecesarias y quedarse solo con lo esencial, accesible.</td></tr>' +
+      '<tr><td class="term">Set in Order</td><td>Seiton</td><td>Ordenar: un lugar para cada cosa, y cada cosa en su lugar, claramente indicado.</td></tr>' +
+      '<tr><td class="term">Shine</td><td>Seiso</td><td>Limpiar: dejar limpios el puesto de trabajo y el equipo al final de cada turno.</td></tr>' +
+      '<tr><td class="term">Standardize</td><td>Seiketsu</td><td>Estandarizar: las prácticas de trabajo son consistentes, con las mismas herramientas y procedimientos en cada puesto.</td></tr>' +
+      '<tr><td class="term">Sustain</td><td>Shitsuke</td><td>Mantener: revisar los estándares y convertirlos en hábito, para seguir mejorando.</td></tr>' +
+    '</tbody></table>' +
+
+    '<h3>El ciclo DMAIC</h3>' +
+    '<p>Qué se hace en cada fase y qué herramientas se usan típicamente en ella — la trampa más habitual del examen es situar una herramienta o una tarea en la fase equivocada.</p>' +
+    '<table class="reftable"><thead><tr><th>Sigla</th><th>Qué se hace</th><th>Herramientas típicas</th></tr></thead><tbody>' +
+      '<tr><td class="term">D — Define</td><td>Definir el problema, el alcance y el objetivo del Kaizen.</td><td>SIPOC, charter Kaizen</td></tr>' +
+      '<tr><td class="term">M — Measure</td><td>Entender el estado actual del proceso y recoger datos fiables. Aquí suelen surgir ya las primeras mejoras rápidas (quick wins).</td><td>Value Stream Map (VSM), diagrama de Pareto</td></tr>' +
+      '<tr><td class="term">A — Analyze</td><td>Identificar y verificar las causas raíz del problema.</td><td>Diagrama de Ishikawa (espina de pescado), técnica de los 5 Porqués</td></tr>' +
+      '<tr><td class="term">I — Improve</td><td>Desarrollar, pilotar e implementar las soluciones seleccionadas.</td><td>Técnica de decisión estructurada, pilotos de la solución</td></tr>' +
+      '<tr><td class="term">C — Control</td><td>Asegurar que la mejora se sostiene en el tiempo y compartir lo aprendido.</td><td>Standard Operating Procedure (SOP), Poka-yoke</td></tr>' +
+    '</tbody></table>' +
+    '</div></div>';
+
+  panel.innerHTML = html;
+}
+
 /* ============== MAIN RENDER ============== */
 function renderAll(){
   renderRail();
+  if(state.view === 'summary'){ renderSummaryPanel(); return; }
   var ex = findExam(state.view);
   if(ex){ renderExamPanel(ex); }
   else {
