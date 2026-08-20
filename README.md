@@ -1,6 +1,6 @@
 # Lean IT Foundation — Guía de estudio
 
-Aplicación de estudio de página única (`index.html`) para preparar el examen **Lean IT Foundation (APMG)** en español: teoría resumida por módulo, tarjetas de conceptos clave y práctica de las 40 preguntas del examen de muestra oficial, con corrección y explicación inmediatas, más un simulacro completo con desglose de resultados por área del temario.
+Aplicación de estudio de página única (`index.html`) para preparar el examen **Lean IT Foundation (APMG)** en español: teoría redactada por módulo, tarjetas de conceptos clave, práctica de las 40 preguntas del examen de muestra oficial y 18 simulacros adicionales (más de 700 preguntas en total), cada uno con corrección, explicación y desglose de resultados por área del temario, además de una sección de resumen con tablas de referencia rápida (5S y DMAIC).
 
 ## Cómo usarla
 
